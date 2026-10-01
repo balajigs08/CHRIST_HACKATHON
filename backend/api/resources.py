@@ -11,12 +11,17 @@ No database, no AI, no optimization, no WebSocket.
 """
 from typing import List, Optional
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 
+from api.auth_deps import check_authority_or_open
 from schemas.resource import ResourceCreate, ResourceResponse, ResourceUpdate
 from services.resource_store import resource_store
 
-router = APIRouter(prefix="/resources", tags=["Resources"])
+router = APIRouter(
+    prefix="/resources",
+    tags=["Resources"],
+    dependencies=[Depends(check_authority_or_open)],
+)
 
 
 # ---------------------------------------------------------------------------

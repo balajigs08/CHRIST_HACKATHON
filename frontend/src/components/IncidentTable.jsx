@@ -22,9 +22,9 @@ export default function IncidentTable({ incidents = [], onResolve, busy }) {
       {/* Header */}
       <div className="panel-title flex-wrap gap-2">
         <div className="flex items-center gap-2 flex-1">
-          <span className="text-orange-400">⚠</span>
+          <span className="text-orange-500">⚠</span>
           <span>Active Incidents</span>
-          <span className="mono rounded-full bg-edge px-2 py-0.5 text-[10px] text-slate-400">
+          <span className="mono rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-600 font-bold">
             {active.length}
           </span>
         </div>
@@ -36,8 +36,8 @@ export default function IncidentTable({ incidents = [], onResolve, busy }) {
               onClick={() => setFilter(f)}
               className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold transition-all capitalize ${
                 filter === f
-                  ? 'bg-sky-500/20 text-sky-300 border border-sky-500/30'
-                  : 'text-slate-500 hover:text-slate-300'
+                  ? 'bg-sky-100 text-sky-700 border border-sky-300'
+                  : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
               }`}
             >
               {f}
@@ -48,7 +48,7 @@ export default function IncidentTable({ incidents = [], onResolve, busy }) {
         <select
           value={sortBy}
           onChange={e => setSortBy(e.target.value)}
-          className="ml-2 rounded border border-edge bg-panel px-2 py-0.5 text-[10px] text-slate-400 outline-none normal-case"
+          className="ml-2 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-[11px] text-slate-700 outline-none normal-case shadow-2xs font-medium"
         >
           <option value="severity">Sort: Severity</option>
           <option value="waiting">Sort: Waiting</option>
@@ -75,7 +75,7 @@ export default function IncidentTable({ incidents = [], onResolve, busy }) {
           <tbody>
             {sorted.length === 0 && (
               <tr>
-                <td colSpan="9" className="py-8 text-center text-slate-600">
+                <td colSpan="9" className="py-8 text-center text-slate-500">
                   <div className="flex flex-col items-center gap-2">
                     <span className="text-2xl">✅</span>
                     <span>No active incidents</span>
@@ -92,28 +92,28 @@ export default function IncidentTable({ incidents = [], onResolve, busy }) {
                   key={i.id}
                   onMouseEnter={() => setHoverId(i.id)}
                   onMouseLeave={() => setHoverId(null)}
-                  className={isCritical ? 'bg-red-500/5' : ''}
+                  className={isCritical ? 'bg-red-50/40' : ''}
                 >
                   <td>
                     <div className="flex items-center gap-2">
                       {isCritical && (
-                        <span className="animate-flash text-red-400 text-[10px]">●</span>
+                        <span className="animate-flash text-red-600 text-[10px]">●</span>
                       )}
-                      <span className="mono font-bold text-slate-200">{i.id}</span>
+                      <span className="mono font-bold text-slate-800">{i.id}</span>
                     </div>
                   </td>
                   <td>
-                    <span className="text-slate-300" title={i.description}>
+                    <span className="text-slate-800 font-medium" title={i.description}>
                       {pretty(i.type)}
                     </span>
                     {i.description && (
-                      <p className="text-[11px] text-slate-600 max-w-[160px] truncate"
+                      <p className="text-[11px] text-slate-500 max-w-[160px] truncate"
                         title={i.description}>{i.description}</p>
                     )}
                   </td>
                   <td>
                     <span
-                      className="badge"
+                      className="badge font-semibold"
                       style={{
                         color: sev.color,
                         borderColor: `${sev.color}40`,
@@ -125,19 +125,19 @@ export default function IncidentTable({ incidents = [], onResolve, busy }) {
                   </td>
                   <td>
                     <div className="flex items-center gap-2">
-                      <div className="h-1.5 w-12 overflow-hidden rounded-full bg-edge">
+                      <div className="h-1.5 w-12 overflow-hidden rounded-full bg-slate-200">
                         <div
                           className="h-full rounded-full transition-all"
                           style={{
                             width: `${i.urgency * 10}%`,
-                            background: i.urgency >= 8 ? '#ef4444' : i.urgency >= 5 ? '#f97316' : '#38bdf8',
+                            background: i.urgency >= 8 ? '#dc2626' : i.urgency >= 5 ? '#ea580c' : '#0284c7',
                           }}
                         />
                       </div>
-                      <span className="mono text-xs text-slate-400">{i.urgency}/10</span>
+                      <span className="mono text-xs text-slate-600 font-medium">{i.urgency}/10</span>
                     </div>
                   </td>
-                  <td className="text-xs text-slate-400">
+                  <td className="text-xs text-slate-600">
                     {i.location_name || `${i.latitude?.toFixed(3)}, ${i.longitude?.toFixed(3)}`}
                   </td>
                   <td>
@@ -147,15 +147,15 @@ export default function IncidentTable({ incidents = [], onResolve, busy }) {
                         return (
                           <span
                             key={r}
-                            className="badge"
+                            className="badge font-medium"
                             style={missing ? {
-                              color: '#fca5a5',
+                              color: '#b91c1c',
                               borderColor: 'rgba(239,68,68,0.4)',
-                              background: 'rgba(239,68,68,0.12)',
+                              background: 'rgba(254,242,242,1)',
                             } : {
-                              color: '#94a3b8',
-                              borderColor: 'rgba(100,116,139,0.3)',
-                              background: 'rgba(100,116,139,0.08)',
+                              color: '#334155',
+                              borderColor: 'rgba(203,213,225,1)',
+                              background: 'rgba(241,245,249,1)',
                             }}
                           >
                             {missing && '✗ '}{pretty(r)}
@@ -165,15 +165,15 @@ export default function IncidentTable({ incidents = [], onResolve, busy }) {
                     </div>
                   </td>
                   <td>
-                    <span className={`badge ${isWaiting ? 'animate-flash' : ''}`}
+                    <span className={`badge font-medium ${isWaiting ? 'animate-flash' : ''}`}
                       style={isWaiting ? {
-                        color: '#c4b5fd',
-                        borderColor: 'rgba(167,139,250,0.4)',
-                        background: 'rgba(167,139,250,0.12)',
+                        color: '#6d28d9',
+                        borderColor: 'rgba(196,181,253,1)',
+                        background: 'rgba(245,243,255,1)',
                       } : {
-                        color: '#86efac',
-                        borderColor: 'rgba(34,197,94,0.3)',
-                        background: 'rgba(34,197,94,0.08)',
+                        color: '#15803d',
+                        borderColor: 'rgba(187,247,208,1)',
+                        background: 'rgba(240,253,244,1)',
                       }}
                     >
                       {i.status}
@@ -181,15 +181,15 @@ export default function IncidentTable({ incidents = [], onResolve, busy }) {
                   </td>
                   <td>
                     <div className="flex items-center gap-1">
-                      <span className="mono text-xs text-slate-400">{Math.round(i.waiting_time)}m</span>
-                      {i.waiting_time > 20 && <span className="text-amber-400 text-[10px]">↑</span>}
+                      <span className="mono text-xs text-slate-600 font-medium">{Math.round(i.waiting_time)}m</span>
+                      {i.waiting_time > 20 && <span className="text-amber-600 font-bold text-[10px]">↑</span>}
                     </div>
                   </td>
                   <td>
                     <button
                       disabled={busy}
                       onClick={() => onResolve(i.id)}
-                      className="btn text-[11px] px-2.5 py-1"
+                      className="btn bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-[11px] px-2.5 py-1 font-medium shadow-2xs"
                     >
                       ✓ Resolve
                     </button>

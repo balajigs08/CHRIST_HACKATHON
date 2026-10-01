@@ -10,8 +10,9 @@ No database, no AI, no optimization.
 """
 from typing import List, Optional
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 
+from api.auth_deps import check_authority_or_open
 from schemas.approval import (
     HumanApprovalRequestCreate,
     HumanApprovalRequestResponse,
@@ -19,7 +20,11 @@ from schemas.approval import (
 )
 from services.approval_store import approval_store
 
-router = APIRouter(prefix="/approvals", tags=["Human Approvals"])
+router = APIRouter(
+    prefix="/approvals",
+    tags=["Human Approvals"],
+    dependencies=[Depends(check_authority_or_open)],
+)
 
 
 # ---------------------------------------------------------------------------

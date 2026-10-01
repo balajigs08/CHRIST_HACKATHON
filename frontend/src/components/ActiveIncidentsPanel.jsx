@@ -19,7 +19,7 @@ export default function ActiveIncidentsPanel({ incidents: propIncidents }) {
       <div className="panel-title flex-wrap gap-2">
         <span className="text-orange-400">⚠</span>
         <span>Active Incidents</span>
-        <span className="mono rounded-full bg-edge px-2 py-0.5 text-[10px] text-slate-400">{active.length}</span>
+        <span className="mono rounded-full bg-slate-100 border border-slate-200 px-2 py-0.5 text-[10px] text-slate-500">{active.length}</span>
         <div className="ml-auto flex flex-wrap gap-1 normal-case">
           {['all', 'critical', 'high', 'medium'].map(f => (
             <button
@@ -27,8 +27,8 @@ export default function ActiveIncidentsPanel({ incidents: propIncidents }) {
               onClick={() => setFilter(f)}
               className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold capitalize transition-all ${
                 filter === f
-                  ? 'bg-sky-500/20 text-sky-300 border border-sky-500/30'
-                  : 'text-slate-600 hover:text-slate-400'
+                  ? 'bg-sky-100 text-sky-700 border border-sky-200'
+                  : 'text-slate-500 hover:text-slate-700'
               }`}
             >
               {f}
@@ -38,7 +38,7 @@ export default function ActiveIncidentsPanel({ incidents: propIncidents }) {
       </div>
 
       {/* List */}
-      <div className="divide-y divide-edge/50">
+      <div className="divide-y divide-slate-100">
         {sorted.map(inc => {
           const sev     = SEVERITY[inc.severity] || SEVERITY.medium
           const isOpen  = expanded === inc.id
@@ -47,9 +47,9 @@ export default function ActiveIncidentsPanel({ incidents: propIncidents }) {
           const icon    = INCIDENT_ICON[inc.type] || INCIDENT_ICON.default
 
           return (
-            <div key={inc.id} className={`transition-colors ${isCrit ? 'bg-red-500/3' : ''}`}>
+            <div key={inc.id} className={`transition-colors ${isCrit ? 'bg-red-50/50' : ''}`}>
               <button
-                className="w-full px-4 py-3 text-left hover:bg-panel2/50 transition-colors"
+                className="w-full px-4 py-3 text-left hover:bg-slate-50 transition-colors"
                 onClick={() => setExpanded(isOpen ? null : inc.id)}
               >
                 <div className="flex items-start gap-3">
@@ -64,9 +64,9 @@ export default function ActiveIncidentsPanel({ incidents: propIncidents }) {
                   {/* Main content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="mono text-xs font-bold text-slate-300">{inc.id}</span>
+                      <span className="mono text-xs font-bold text-slate-700">{inc.id}</span>
                       <span className="text-[10px]">{icon}</span>
-                      <span className="text-xs text-slate-400">{pretty(inc.type)}</span>
+                      <span className="text-xs text-slate-500">{pretty(inc.type)}</span>
                       <span
                         className="badge"
                         style={{ color: sev.color, borderColor: `${sev.color}40`, background: `${sev.color}12` }}
@@ -82,10 +82,10 @@ export default function ActiveIncidentsPanel({ incidents: propIncidents }) {
                         </span>
                       )}
                     </div>
-                    <p className="mt-1 text-xs text-slate-400 leading-relaxed truncate">
+                    <p className="mt-1 text-xs text-slate-500 leading-relaxed truncate">
                       {inc.description}
                     </p>
-                    <div className="mt-1.5 flex flex-wrap gap-3 text-[11px] text-slate-600">
+                    <div className="mt-1.5 flex flex-wrap gap-3 text-[11px] text-slate-400">
                       <span>📍 {inc.location_name}</span>
                       <span>⏱ {timeSince(inc.created_at)}</span>
                       <span>🕐 waiting {Math.round(inc.waiting_time)}m</span>
@@ -94,7 +94,7 @@ export default function ActiveIncidentsPanel({ incidents: propIncidents }) {
                   </div>
 
                   {/* Expand arrow */}
-                  <span className={`text-slate-600 text-xs flex-shrink-0 mt-1 transition-transform ${isOpen ? 'rotate-180' : ''}`}>
+                  <span className={`text-slate-400 text-xs flex-shrink-0 mt-1 transition-transform ${isOpen ? 'rotate-180' : ''}`}>
                     ▾
                   </span>
                 </div>
@@ -102,10 +102,10 @@ export default function ActiveIncidentsPanel({ incidents: propIncidents }) {
 
               {/* Expanded detail */}
               {isOpen && (
-                <div className="border-t border-edge/40 bg-panel2/40 px-4 py-3 slide-up">
+                <div className="border-t border-slate-100 bg-slate-50 px-4 py-3 slide-up">
                   <div className="grid gap-3 sm:grid-cols-2 text-xs">
                     <div>
-                      <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-600 mb-1">Required Resources</p>
+                      <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-500 mb-1">Required Resources</p>
                       <div className="flex flex-wrap gap-1.5">
                         {inc.required_resources.map(r => {
                           const missing = inc.missing_resources.includes(r)
@@ -123,19 +123,19 @@ export default function ActiveIncidentsPanel({ incidents: propIncidents }) {
                       </div>
                     </div>
                     <div>
-                      <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-600 mb-1">Assigned Units</p>
+                      <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-500 mb-1">Assigned Units</p>
                       <div className="flex flex-wrap gap-1.5">
                         {inc.assigned_resources.length > 0
                           ? inc.assigned_resources.map(r => (
-                            <span key={r} className="mono text-[11px] font-bold text-sky-300 bg-sky-500/10 border border-sky-500/25 rounded-md px-2 py-0.5">{r}</span>
+                            <span key={r} className="mono text-[11px] font-bold text-sky-700 bg-sky-50 border border-sky-200 rounded-md px-2 py-0.5">{r}</span>
                           ))
-                          : <span className="text-slate-600">None assigned</span>
+                          : <span className="text-slate-400">None assigned</span>
                         }
                       </div>
                     </div>
                     <div className="sm:col-span-2">
-                      <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-600 mb-1">Coordinates</p>
-                      <p className="mono text-slate-500">{inc.latitude.toFixed(4)}, {inc.longitude.toFixed(4)}</p>
+                      <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-500 mb-1">Coordinates</p>
+                      <p className="mono text-slate-400">{inc.latitude.toFixed(4)}, {inc.longitude.toFixed(4)}</p>
                     </div>
                   </div>
                 </div>

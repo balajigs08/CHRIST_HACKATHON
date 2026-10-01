@@ -150,51 +150,51 @@ export default function IncidentsPage() {
         <div className="stat-card" style={{ '--accent-color': '#0ea5e9' }}>
           <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Total Incidents</span>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold mono text-white">{stats.total}</span>
-            <span className="text-[11px] text-slate-500">registered</span>
+            <span className="text-2xl font-bold mono text-slate-900">{stats.total}</span>
+            <span className="text-[11px] text-slate-500 font-medium">registered</span>
           </div>
         </div>
 
         <div className="stat-card" style={{ '--accent-color': '#ef4444' }}>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-red-400">Critical Active</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-red-600">Critical Active</span>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold mono text-red-400 animate-flash">{stats.critical}</span>
-            <span className="text-[11px] text-red-500/80">urgent</span>
+            <span className="text-2xl font-bold mono text-red-700 animate-flash">{stats.critical}</span>
+            <span className="text-[11px] text-red-600 font-medium">urgent</span>
           </div>
         </div>
 
         <div className="stat-card" style={{ '--accent-color': '#f97316' }}>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-orange-400">High Priority</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-orange-600">High Priority</span>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold mono text-orange-400">{stats.high}</span>
-            <span className="text-[11px] text-orange-500/80">monitored</span>
+            <span className="text-2xl font-bold mono text-orange-700">{stats.high}</span>
+            <span className="text-[11px] text-orange-600 font-medium">monitored</span>
           </div>
         </div>
 
         <div className="stat-card" style={{ '--accent-color': '#c084fc' }}>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-purple-400">Awaiting Units</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-purple-600">Awaiting Units</span>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold mono text-purple-400">{stats.waiting}</span>
-            <span className="text-[11px] text-purple-400/80">in queue</span>
+            <span className="text-2xl font-bold mono text-purple-700">{stats.waiting}</span>
+            <span className="text-[11px] text-purple-600 font-medium">in queue</span>
           </div>
         </div>
 
         <div className="stat-card col-span-2 sm:col-span-1" style={{ '--accent-color': '#22c55e' }}>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400">Resolved</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600">Resolved</span>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold mono text-emerald-400">{stats.resolved}</span>
-            <span className="text-[11px] text-emerald-500/80">contained</span>
+            <span className="text-2xl font-bold mono text-emerald-700">{stats.resolved}</span>
+            <span className="text-[11px] text-emerald-600 font-medium">contained</span>
           </div>
         </div>
       </div>
 
       {/* ── Toolbar: Search, Filters, Actions ── */}
-      <div className="panel p-4 space-y-3">
+      <div className="panel p-4 space-y-3 bg-white border-slate-200">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
           
           {/* Search Box */}
           <div className="relative flex-1 min-w-[240px]">
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm">
+            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm">
               🔍
             </span>
             <input
@@ -202,12 +202,12 @@ export default function IncidentsPage() {
               placeholder="Search by ID, type, location or description..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="input pl-10 pr-9 text-xs"
+              className="input pl-10 pr-9 text-xs bg-white"
             />
             {search && (
               <button
                 onClick={() => setSearch('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 text-xs"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 text-xs"
                 title="Clear search"
               >
                 ✕
@@ -218,13 +218,13 @@ export default function IncidentsPage() {
           {/* Action buttons */}
           <div className="flex items-center gap-2 self-end lg:self-auto flex-wrap">
             {/* View Mode Switcher */}
-            <div className="flex items-center rounded-lg border border-edge bg-panel2 p-0.5">
+            <div className="flex items-center rounded-lg border border-slate-200 bg-slate-50 p-0.5">
               <button
                 onClick={() => setViewMode('table')}
                 className={`rounded-md px-2.5 py-1 text-xs font-semibold transition-all ${
                   viewMode === 'table'
-                    ? 'bg-sky-500/20 text-sky-300 border border-sky-500/30'
-                    : 'text-slate-500 hover:text-slate-300'
+                    ? 'bg-sky-100 text-sky-700 border border-sky-300'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
                 title="Table View"
               >
@@ -234,8 +234,8 @@ export default function IncidentsPage() {
                 onClick={() => setViewMode('cards')}
                 className={`rounded-md px-2.5 py-1 text-xs font-semibold transition-all ${
                   viewMode === 'cards'
-                    ? 'bg-sky-500/20 text-sky-300 border border-sky-500/30'
-                    : 'text-slate-500 hover:text-slate-300'
+                    ? 'bg-sky-100 text-sky-700 border border-sky-300'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
                 title="Grid Cards View"
               >
@@ -247,26 +247,24 @@ export default function IncidentsPage() {
             <button
               onClick={handleRefresh}
               disabled={loading}
-              className="btn text-xs"
+              className="btn bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-medium"
               title="Refresh telemetry"
             >
               <span className={loading ? 'animate-spin' : ''}>🔄</span>
               <span className="hidden sm:inline">Refresh</span>
             </button>
 
-            {/* Create Incident Button */}
-            <button
-              onClick={() => setIsCreateOpen(true)}
-              className="btn btn-primary text-xs flex items-center gap-2"
-            >
-              <span>+</span>
-              <span>Create Incident</span>
-            </button>
+            {/* Authority Triage Telemetry Indicator */}
+            <div className="hidden sm:flex items-center gap-1.5 rounded-xl border border-sky-200 bg-sky-50 px-3 py-1 text-xs text-sky-700 font-mono font-medium">
+              <span className="h-2 w-2 rounded-full bg-sky-600 animate-pulse" />
+              INCOMING INTAKE STREAM
+            </div>
           </div>
         </div>
 
+
         {/* Filter Chips Bar */}
-        <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-edge text-xs">
+        <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-slate-200 text-xs">
           
           {/* Severity Filters */}
           <div className="flex items-center gap-1.5 flex-wrap">
@@ -280,14 +278,14 @@ export default function IncidentsPage() {
                   onClick={() => setSeverityFilter(s)}
                   className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold capitalize transition-all ${
                     active
-                      ? 'border shadow-sm'
-                      : 'border border-edge bg-panel2/40 text-slate-500 hover:text-slate-300'
+                      ? 'border shadow-2xs font-bold'
+                      : 'border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                   }`}
                   style={
                     active
                       ? sColor
                         ? { color: sColor, borderColor: `${sColor}60`, background: `${sColor}18` }
-                        : { color: '#38bdf8', borderColor: '#38bdf860', background: 'rgba(56,189,248,0.15)' }
+                        : { color: '#0284c7', borderColor: '#0284c7', background: 'rgba(2,132,199,0.1)' }
                       : {}
                   }
                 >
@@ -297,7 +295,7 @@ export default function IncidentsPage() {
             })}
           </div>
 
-          <div className="hidden md:block h-4 w-px bg-edge" />
+          <div className="hidden md:block h-4 w-px bg-slate-200" />
 
           {/* Status Filters */}
           <div className="flex items-center gap-1.5 flex-wrap">
@@ -310,8 +308,8 @@ export default function IncidentsPage() {
                   onClick={() => setStatusFilter(st)}
                   className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold capitalize transition-all ${
                     active
-                      ? 'bg-sky-500/20 text-sky-300 border border-sky-500/40'
-                      : 'border border-edge bg-panel2/40 text-slate-500 hover:text-slate-300'
+                      ? 'bg-sky-100 text-sky-700 border border-sky-300 font-bold'
+                      : 'border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                   }`}
                 >
                   {st}
@@ -320,7 +318,7 @@ export default function IncidentsPage() {
             })}
           </div>
 
-          <div className="hidden md:block h-4 w-px bg-edge" />
+          <div className="hidden md:block h-4 w-px bg-slate-200" />
 
           {/* Incident Type dropdown */}
           <div className="flex items-center gap-2 ml-auto">
@@ -328,7 +326,7 @@ export default function IncidentsPage() {
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
-              className="rounded-lg border border-edge bg-panel2 px-2.5 py-1 text-xs text-slate-300 outline-none cursor-pointer"
+              className="rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs text-slate-700 outline-none cursor-pointer shadow-2xs font-medium"
             >
               <option value="all">All Types ({availableTypes.length})</option>
               {availableTypes.map((t) => (
@@ -341,7 +339,7 @@ export default function IncidentsPage() {
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
-                className="text-[11px] text-red-400 hover:text-red-300 underline underline-offset-2 ml-1"
+                className="text-[11px] text-red-600 hover:text-red-800 font-semibold underline underline-offset-2 ml-1"
               >
                 Reset filters
               </button>
@@ -355,9 +353,9 @@ export default function IncidentsPage() {
       {loading ? (
         <LoadingSkeleton viewMode={viewMode} />
       ) : filteredIncidents.length === 0 ? (
-        <div className="panel p-12 text-center space-y-3">
+        <div className="panel p-12 text-center space-y-3 bg-white border-slate-200">
           <div className="text-4xl">📡</div>
-          <h3 className="text-sm font-bold text-slate-300">No Incidents Found</h3>
+          <h3 className="text-sm font-bold text-slate-800">No Incidents Found</h3>
           <p className="text-xs text-slate-500 max-w-sm mx-auto">
             No incidents matched your current search parameters or active filters.
           </p>
@@ -372,7 +370,7 @@ export default function IncidentsPage() {
         </div>
       ) : viewMode === 'table' ? (
         /* ── TABLE VIEW ── */
-        <div className="panel overflow-x-auto">
+        <div className="panel overflow-x-auto bg-white border-slate-200">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr>
@@ -386,12 +384,12 @@ export default function IncidentsPage() {
                 <th className="text-right pr-4">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-edge/50">
+            <tbody className="divide-y divide-slate-100">
               {filteredIncidents.map((inc) => {
                 const sev = SEVERITY[inc.severity] || SEVERITY.medium
                 const st = INCIDENT_STATUS[inc.status] || {
                   label: prettyCap(inc.status),
-                  color: '#94a3b8',
+                  color: '#64748b',
                 }
                 const icon = INCIDENT_ICON[inc.type] || INCIDENT_ICON.default
                 const isCrit = inc.severity === 'critical'
@@ -404,14 +402,14 @@ export default function IncidentsPage() {
                     onClick={() => setSelectedIncident(inc)}
                     className={`cursor-pointer transition-colors ${
                       isSelected
-                        ? 'bg-sky-500/10'
+                        ? 'bg-sky-50/80'
                         : isCrit
-                        ? 'hover:bg-red-500/5 bg-red-500/2'
-                        : 'hover:bg-panel2/60'
+                        ? 'hover:bg-red-50/50 bg-red-50/30'
+                        : 'hover:bg-slate-50'
                     }`}
                   >
                     {/* ID */}
-                    <td className="mono font-bold text-xs text-white">
+                    <td className="mono font-bold text-xs text-slate-900">
                       <div className="flex items-center gap-2">
                         <span
                           className={`h-2 w-2 rounded-full flex-shrink-0 ${isCrit ? 'animate-flash' : ''}`}
@@ -428,7 +426,7 @@ export default function IncidentsPage() {
                     <td>
                       <div className="flex items-center gap-2">
                         <span className="text-sm">{icon}</span>
-                        <span className="text-xs font-medium text-slate-300 capitalize">
+                        <span className="text-xs font-semibold text-slate-800 capitalize">
                           {pretty(inc.type)}
                         </span>
                       </div>
@@ -437,7 +435,7 @@ export default function IncidentsPage() {
                     {/* Location */}
                     <td>
                       <div className="max-w-xs">
-                        <p className="text-xs text-slate-200 truncate">{inc.location_name}</p>
+                        <p className="text-xs font-medium text-slate-800 truncate">{inc.location_name}</p>
                         <p className="mono text-[10px] text-slate-500 truncate mt-0.5">
                           {inc.latitude ? `${inc.latitude.toFixed(3)}, ${inc.longitude.toFixed(3)}` : 'Grid Alpha'}
                         </p>
@@ -447,7 +445,7 @@ export default function IncidentsPage() {
                     {/* Severity */}
                     <td>
                       <span
-                        className="badge"
+                        className="badge font-semibold"
                         style={{
                           color: sev.color,
                           borderColor: `${sev.color}45`,
@@ -461,7 +459,7 @@ export default function IncidentsPage() {
                     {/* Status */}
                     <td>
                       <span
-                        className={`badge ${isWaiting ? 'animate-flash' : ''}`}
+                        className={`badge font-semibold ${isWaiting ? 'animate-flash' : ''}`}
                         style={{
                           color: st.color,
                           borderColor: `${st.color}45`,
@@ -475,7 +473,7 @@ export default function IncidentsPage() {
 
                     {/* Reported */}
                     <td>
-                      <div className="text-xs text-slate-300">{timeSince(inc.created_at)}</div>
+                      <div className="text-xs font-medium text-slate-700">{timeSince(inc.created_at)}</div>
                       <div className="mono text-[10px] text-slate-500">{fmtTime(inc.created_at)}</div>
                     </td>
 
@@ -487,18 +485,18 @@ export default function IncidentsPage() {
                           return (
                             <span
                               key={r}
-                              className="badge text-[9px] px-2 py-0.5"
+                              className="badge text-[9px] px-2 py-0.5 font-medium"
                               style={
                                 isMissing
                                   ? {
-                                      color: '#fca5a5',
+                                      color: '#b91c1c',
                                       borderColor: 'rgba(239,68,68,0.4)',
-                                      background: 'rgba(239,68,68,0.1)',
+                                      background: 'rgba(254,242,242,1)',
                                     }
                                   : {
-                                      color: '#86efac',
+                                      color: '#15803d',
                                       borderColor: 'rgba(34,197,94,0.35)',
-                                      background: 'rgba(34,197,94,0.08)',
+                                      background: 'rgba(240,253,244,1)',
                                     }
                               }
                             >
@@ -517,7 +515,7 @@ export default function IncidentsPage() {
                           e.stopPropagation()
                           setSelectedIncident(inc)
                         }}
-                        className="btn text-[11px] py-1 px-2.5 hover:text-white"
+                        className="btn bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-[11px] py-1 px-2.5 font-medium shadow-2xs"
                       >
                         View Details →
                       </button>
@@ -535,7 +533,7 @@ export default function IncidentsPage() {
             const sev = SEVERITY[inc.severity] || SEVERITY.medium
             const st = INCIDENT_STATUS[inc.status] || {
               label: prettyCap(inc.status),
-              color: '#94a3b8',
+              color: '#64748b',
             }
             const icon = INCIDENT_ICON[inc.type] || INCIDENT_ICON.default
             const isCrit = inc.severity === 'critical'
@@ -546,30 +544,30 @@ export default function IncidentsPage() {
               <div
                 key={inc.id}
                 onClick={() => setSelectedIncident(inc)}
-                className={`panel p-4 cursor-pointer transition-all flex flex-col justify-between ${
+                className={`panel p-4 cursor-pointer transition-all flex flex-col justify-between bg-white border-slate-200 shadow-2xs ${
                   isSelected
-                    ? 'border-sky-500/60 ring-1 ring-sky-500/30'
+                    ? 'border-sky-400 ring-2 ring-sky-200'
                     : isCrit
-                    ? 'border-red-500/30 hover:border-red-500/60'
-                    : 'hover:border-edge-2'
+                    ? 'border-red-200 hover:border-red-300'
+                    : 'hover:border-slate-300 hover:shadow-xs'
                 }`}
               >
                 <div>
                   {/* Card Header */}
                   <div className="flex items-center justify-between gap-2 mb-2.5">
                     <div className="flex items-center gap-2">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-edge/70 text-base border border-edge-2">
+                      <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-base border border-slate-200">
                         {icon}
                       </span>
                       <div>
-                        <span className="mono text-xs font-bold text-white">{inc.id}</span>
-                        <p className="text-[11px] text-slate-400 capitalize">{pretty(inc.type)}</p>
+                        <span className="mono text-xs font-bold text-slate-900">{inc.id}</span>
+                        <p className="text-[11px] text-slate-500 capitalize font-medium">{pretty(inc.type)}</p>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-1.5">
                       <span
-                        className="badge text-[10px]"
+                        className="badge text-[10px] font-semibold"
                         style={{
                           color: sev.color,
                           borderColor: `${sev.color}45`,
@@ -579,7 +577,7 @@ export default function IncidentsPage() {
                         {sev.label}
                       </span>
                       <span
-                        className={`badge text-[10px] ${isWaiting ? 'animate-flash' : ''}`}
+                        className={`badge text-[10px] font-semibold ${isWaiting ? 'animate-flash' : ''}`}
                         style={{
                           color: st.color,
                           borderColor: `${st.color}45`,
@@ -593,13 +591,13 @@ export default function IncidentsPage() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs text-slate-300 line-clamp-2 mb-3 leading-relaxed">
+                  <p className="text-xs text-slate-700 line-clamp-2 mb-3 leading-relaxed font-normal">
                     {inc.description}
                   </p>
 
                   {/* Location & Reported */}
-                  <div className="space-y-1 text-xs text-slate-400 mb-3 bg-panel2/50 rounded-lg p-2.5 border border-edge/60">
-                    <div className="flex items-center gap-1.5 truncate">
+                  <div className="space-y-1 text-xs text-slate-600 mb-3 bg-slate-50 rounded-lg p-2.5 border border-slate-200">
+                    <div className="flex items-center gap-1.5 truncate font-medium">
                       <span>📍</span>
                       <span className="truncate">{inc.location_name}</span>
                     </div>
@@ -611,7 +609,7 @@ export default function IncidentsPage() {
 
                   {/* Required Resources badges */}
                   <div className="mb-4">
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 block mb-1.5">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-1.5">
                       Required Fleet:
                     </span>
                     <div className="flex flex-wrap gap-1">
@@ -620,18 +618,18 @@ export default function IncidentsPage() {
                         return (
                           <span
                             key={r}
-                            className="badge text-[9px]"
+                            className="badge text-[9px] font-medium"
                             style={
                               isMissing
                                 ? {
-                                    color: '#fca5a5',
+                                    color: '#b91c1c',
                                     borderColor: 'rgba(239,68,68,0.4)',
-                                    background: 'rgba(239,68,68,0.1)',
+                                    background: 'rgba(254,242,242,1)',
                                   }
                                 : {
-                                    color: '#86efac',
+                                    color: '#15803d',
                                     borderColor: 'rgba(34,197,94,0.35)',
-                                    background: 'rgba(34,197,94,0.08)',
+                                    background: 'rgba(240,253,244,1)',
                                   }
                             }
                           >
@@ -645,17 +643,17 @@ export default function IncidentsPage() {
                 </div>
 
                 {/* Card Footer */}
-                <div className="pt-3 border-t border-edge flex items-center justify-between">
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
                   <div className="flex items-center gap-1 text-[11px] text-slate-500">
                     <span>Priority:</span>
-                    <span className="mono font-bold text-slate-300">{inc.urgency}/10</span>
+                    <span className="mono font-bold text-slate-800">{inc.urgency}/10</span>
                   </div>
                   <button
                     onClick={(e) => {
                       e.stopPropagation()
                       setSelectedIncident(inc)
                     }}
-                    className="btn text-xs py-1 px-3 hover:text-white"
+                    className="btn bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs py-1 px-3 font-medium shadow-2xs"
                   >
                     View Details →
                   </button>
@@ -684,18 +682,19 @@ export default function IncidentsPage() {
       {toast && (
         <div className="fixed bottom-6 right-6 z-50 slide-in">
           <div
-            className="toast flex items-center gap-3 bg-panel border-edge shadow-2xl"
+            className="toast flex items-center gap-3 bg-white border border-slate-200 shadow-xl rounded-xl p-3"
             style={{
-              borderLeftColor: toast.type === 'success' ? '#22c55e' : '#38bdf8',
+              borderLeftWidth: '4px',
+              borderLeftColor: toast.type === 'success' ? '#16a34a' : '#0284c7',
             }}
           >
             <span className="text-base">
               {toast.type === 'success' ? '✅' : 'ℹ️'}
             </span>
-            <span className="text-xs text-slate-200">{toast.message}</span>
+            <span className="text-xs font-semibold text-slate-800">{toast.message}</span>
             <button
               onClick={() => setToast(null)}
-              className="text-slate-500 hover:text-white text-xs ml-2"
+              className="text-slate-400 hover:text-slate-700 text-xs ml-2 font-bold"
             >
               ✕
             </button>

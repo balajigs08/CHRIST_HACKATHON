@@ -11,14 +11,19 @@ No database, no AI, no optimization, no WebSocket.
 """
 from typing import Any, Dict, List, Optional
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 
+from api.auth_deps import check_authority_or_open
 from schemas.plan import ResponsePlanCreate, ResponsePlanResponse, ResponsePlanUpdate
 from services.incident_store import incident_store
 from services.resource_store import resource_store
 from services.response_plan_store import response_plan_store
 
-router = APIRouter(prefix="/response-plans", tags=["Response Plans"])
+router = APIRouter(
+    prefix="/response-plans",
+    tags=["Response Plans"],
+    dependencies=[Depends(check_authority_or_open)],
+)
 
 
 # ---------------------------------------------------------------------------

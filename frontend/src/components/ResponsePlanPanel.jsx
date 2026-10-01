@@ -27,30 +27,30 @@ export default function ResponsePlanPanel({ plan: propPlan }) {
       <div className="panel-title flex-wrap gap-2">
         <span className="text-violet-400">📋</span>
         <span>Current Response Plan</span>
-        <span className="mono text-[10px] font-normal text-slate-600 normal-case ml-1">· {plan.plan_id}</span>
+        <span className="mono text-[10px] font-normal text-slate-400 normal-case ml-1">· {plan.plan_id}</span>
         <div className="ml-auto flex items-center gap-2 normal-case">
-          <span className="mono text-[10px] text-slate-600">
-            CBC: <span className="text-green-400">{plan.optimization_status}</span>
+          <span className="mono text-[10px] text-slate-500">
+            CBC: <span className="text-green-600">{plan.optimization_status}</span>
           </span>
           {plan.objective_value != null && (
-            <span className="mono text-[10px] text-slate-600">obj {plan.objective_value}</span>
+            <span className="mono text-[10px] text-slate-400">obj {plan.objective_value}</span>
           )}
         </div>
       </div>
 
       {/* Explanation */}
-      <div className="border-b border-edge/60 bg-panel2/30 px-4 py-2.5">
+      <div className="border-b border-slate-100 bg-slate-50 px-4 py-2.5">
         <p className="text-xs text-slate-500 italic leading-relaxed">{plan.explanation}</p>
       </div>
 
       {/* Shortage alert */}
       {unassigned.length > 0 && (
-        <div className="border-b border-red-500/20 bg-red-500/5 px-4 py-2.5">
+        <div className="border-b border-red-200 bg-red-50 px-4 py-2.5">
           <div className="flex items-center gap-2">
-            <span className="animate-flash text-red-400 text-sm">⚠</span>
+            <span className="animate-flash text-red-500 text-sm">⚠</span>
             <div className="text-xs">
-              <span className="font-semibold text-red-300">{unassigned.length} shortage{unassigned.length > 1 ? 's' : ''}: </span>
-              <span className="text-red-400/70">
+              <span className="font-semibold text-red-700">{unassigned.length} shortage{unassigned.length > 1 ? 's' : ''}: </span>
+              <span className="text-red-500">
                 {unassigned.map(u => `${u.incident_id} (${u.missing_resources.map(pretty).join(', ')})`).join(' · ')}
               </span>
             </div>
@@ -77,10 +77,10 @@ export default function ResponsePlanPanel({ plan: propPlan }) {
               const ico = TYPE_ICON[x.resource_type] || '🚗'
               return (
                 <tr key={x.id} title={x.reason}>
-                  <td className="mono font-bold text-slate-200">{x.incident_id}</td>
-                  <td className="mono font-semibold text-sky-300">{x.resource_id}</td>
+                  <td className="mono font-bold text-slate-700">{x.incident_id}</td>
+                  <td className="mono font-semibold text-sky-600">{x.resource_id}</td>
                   <td>
-                    <span className="flex items-center gap-1 text-xs text-slate-400">
+                    <span className="flex items-center gap-1 text-xs text-slate-500">
                       <span>{ico}</span>
                       {pretty(x.resource_type)}
                     </span>
@@ -88,7 +88,7 @@ export default function ResponsePlanPanel({ plan: propPlan }) {
                   <td>
                     <div className="flex items-center gap-1">
                       <span style={{ color: st.color }}>⟳</span>
-                      <span className="mono text-xs text-slate-300">{x.eta} min</span>
+                      <span className="mono text-xs text-slate-600">{x.eta} min</span>
                     </div>
                   </td>
                   <td className="mono text-xs text-slate-500">{x.distance} km</td>
@@ -105,9 +105,9 @@ export default function ResponsePlanPanel({ plan: propPlan }) {
             })}
             {/* Unassigned rows */}
             {unassigned.map(u => (
-              <tr key={u.incident_id} className="bg-red-500/5">
-                <td className="mono font-bold text-red-300">{u.incident_id}</td>
-                <td colSpan="3" className="text-xs text-red-400/80">
+              <tr key={u.incident_id} className="bg-red-50">
+                <td className="mono font-bold text-red-600">{u.incident_id}</td>
+                <td colSpan="3" className="text-xs text-red-500">
                   ✗ Unassigned — missing: {u.missing_resources.map(pretty).join(', ')}
                 </td>
                 <td />

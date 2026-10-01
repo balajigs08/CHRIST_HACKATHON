@@ -155,24 +155,24 @@ export default function ResponsePlansPage() {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="flex items-center gap-3 flex-wrap">
-              <span className="mono text-xl font-black text-white tracking-wide">
+              <span className="mono text-xl font-black text-slate-900 tracking-wide">
                 {currentPlan.plan_id}
               </span>
               <span
                 className="badge text-xs font-bold px-3 py-1"
                 style={{
                   color: planSt.color,
-                  borderColor: `${planSt.color}50`,
+                  borderColor: `${planSt.color}40`,
                   background: `${planSt.color}15`,
                 }}
               >
                 {planSt.label}
               </span>
-              <span className="rounded-full bg-edge px-3 py-0.5 text-xs text-slate-300 font-semibold border border-edge-2">
+              <span className="rounded-full bg-slate-100 px-3 py-0.5 text-xs text-slate-700 font-semibold border border-slate-200">
                 {currentPlan.priority}
               </span>
             </div>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-500">
               Active Optimization Framework · Multi-Agency Urban Tactical Dispatch Plan
             </p>
           </div>
@@ -181,7 +181,7 @@ export default function ResponsePlansPage() {
           <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={() => setIsDetailsModalOpen(true)}
-              className="btn text-xs py-2 px-3.5 hover:text-white"
+              className="btn text-xs py-2 px-3.5 hover:text-slate-900"
               title="Inspect optimization rationale & constraint details"
             >
               <span>📋</span>
@@ -201,7 +201,7 @@ export default function ResponsePlansPage() {
             <button
               onClick={handleSimulateUpdate}
               disabled={loading}
-              className="btn btn-primary text-xs py-2 px-4 shadow-lg shadow-sky-500/20"
+              className="btn btn-primary text-xs py-2 px-4 shadow-sm"
               title="Simulate re-optimization with new telemetry"
             >
               <span>⚡</span>
@@ -211,12 +211,12 @@ export default function ResponsePlansPage() {
         </div>
 
         {/* Plan Metadata Strip */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-edge text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-slate-200 text-xs">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
               Created Time
             </span>
-            <span className="mono text-slate-300 text-xs font-medium">
+            <span className="mono text-slate-800 text-xs font-medium">
               {fmtDate(currentPlan.created_at)}
             </span>
           </div>
@@ -224,7 +224,7 @@ export default function ResponsePlansPage() {
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
               Last Recalculated
             </span>
-            <span className="mono text-slate-300 text-xs font-medium">
+            <span className="mono text-slate-800 text-xs font-medium">
               {timeSince(currentPlan.last_updated)} ({fmtTime(currentPlan.last_updated)})
             </span>
           </div>
@@ -232,7 +232,7 @@ export default function ResponsePlansPage() {
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
               Optimization Status
             </span>
-            <span className="text-emerald-400 font-semibold">
+            <span className="text-emerald-700 font-semibold">
               ✓ {currentPlan.optimization_status}
             </span>
           </div>
@@ -240,7 +240,7 @@ export default function ResponsePlansPage() {
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
               Objective Value
             </span>
-            <span className="mono text-sky-400 font-bold">
+            <span className="mono text-sky-800 font-bold">
               {currentPlan.objective_value} pts (Optimal)
             </span>
           </div>
@@ -249,65 +249,65 @@ export default function ResponsePlansPage() {
 
       {/* ── Summary Cards Strip ── */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="stat-card" style={{ '--accent-color': '#0ea5e9' }}>
+        <div className="stat-card" style={{ '--accent-color': '#0284c7' }}>
           <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
             Total Incidents
           </span>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold mono text-white">
+            <span className="text-2xl font-bold mono text-slate-900">
               {summary.totalIncidents}
             </span>
             <span className="text-[11px] text-slate-500">in plan</span>
           </div>
         </div>
 
-        <div className="stat-card" style={{ '--accent-color': '#22c55e' }}>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400">
+        <div className="stat-card" style={{ '--accent-color': '#16a34a' }}>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700">
             Resources Assigned
           </span>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold mono text-emerald-400">
+            <span className="text-2xl font-bold mono text-emerald-700">
               {summary.resourcesAssigned}
             </span>
-            <span className="text-[11px] text-emerald-500/80">deployed units</span>
+            <span className="text-[11px] text-emerald-700/80">deployed units</span>
           </div>
         </div>
 
-        <div className="stat-card" style={{ '--accent-color': '#c084fc' }}>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-purple-400">
+        <div className="stat-card" style={{ '--accent-color': '#7c3aed' }}>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-purple-700">
             Standby / Shortages
           </span>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold mono text-purple-300">
+            <span className="text-2xl font-bold mono text-purple-700">
               {summary.availableStandby} free
             </span>
             {summary.shortagesCount > 0 && (
-              <span className="text-[10px] text-red-400 font-bold">
+              <span className="text-[10px] text-red-600 font-bold">
                 ({summary.shortagesCount} deficits)
               </span>
             )}
           </div>
         </div>
 
-        <div className="stat-card" style={{ '--accent-color': '#f97316' }}>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-orange-400">
+        <div className="stat-card" style={{ '--accent-color': '#ea580c' }}>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-orange-700">
             Estimated Response Time
           </span>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold mono text-orange-300">
+            <span className="text-2xl font-bold mono text-orange-700">
               {summary.avgEta}m
             </span>
-            <span className="text-[11px] text-orange-400/80">average ETA</span>
+            <span className="text-[11px] text-orange-600/80">average ETA</span>
           </div>
         </div>
       </div>
 
       {/* ── Response-Plan Timeline Sequence ── */}
       <div className="panel p-5 space-y-4">
-        <div className="flex items-center justify-between border-b border-edge pb-2.5">
+        <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
           <div className="flex items-center gap-2">
-            <span className="text-sky-400 text-base">⏱</span>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
+            <span className="text-sky-600 text-base">⏱</span>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800">
               Response-Plan Evolution Timeline
             </h3>
           </div>
@@ -325,12 +325,12 @@ export default function ResponsePlansPage() {
             return (
               <div
                 key={item.step}
-                className={`relative rounded-xl border p-3 flex flex-col justify-between transition-all ${
+                className={`relative rounded-xl border p-3 flex flex-col justify-between transition-all shadow-xs ${
                   isActive
-                    ? 'border-sky-500/60 bg-sky-500/10 shadow-lg shadow-sky-500/10'
+                    ? 'border-sky-300 bg-sky-50 shadow-sm'
                     : isDone
-                    ? 'border-edge bg-panel2/40'
-                    : 'border-edge/50 bg-panel2/20 opacity-60'
+                    ? 'border-slate-200 bg-slate-50'
+                    : 'border-slate-200 bg-white opacity-60'
                 }`}
               >
                 <div>
@@ -338,10 +338,10 @@ export default function ResponsePlansPage() {
                     <span
                       className={`h-5 w-5 rounded-full flex items-center justify-center text-[10px] font-bold mono ${
                         isDone
-                          ? 'bg-emerald-500 text-white'
+                          ? 'bg-emerald-600 text-white'
                           : isActive
-                          ? 'bg-sky-500 text-white animate-pulse'
-                          : 'bg-edge text-slate-500'
+                          ? 'bg-sky-600 text-white animate-pulse'
+                          : 'bg-slate-200 text-slate-600'
                       }`}
                     >
                       {isDone ? '✓' : item.step}
@@ -350,15 +350,15 @@ export default function ResponsePlansPage() {
                       {fmtTime(item.time)}
                     </span>
                   </div>
-                  <h4 className="text-xs font-bold text-slate-200 mb-1">{item.title}</h4>
-                  <p className="text-[11px] text-slate-400 leading-snug">{item.description}</p>
+                  <h4 className="text-xs font-bold text-slate-900 mb-1">{item.title}</h4>
+                  <p className="text-[11px] text-slate-600 leading-snug">{item.description}</p>
                 </div>
 
-                <div className="mt-2.5 pt-2 border-t border-edge/60 flex items-center justify-between text-[10px]">
+                <div className="mt-2.5 pt-2 border-t border-slate-200 flex items-center justify-between text-[10px]">
                   <span className="text-slate-500 uppercase font-semibold">Step {item.step}/5</span>
                   <span
                     className={`font-semibold capitalize ${
-                      isActive ? 'text-sky-400 font-bold' : isDone ? 'text-emerald-400' : 'text-slate-600'
+                      isActive ? 'text-sky-800 font-bold' : isDone ? 'text-emerald-700' : 'text-slate-500'
                     }`}
                   >
                     {item.status}
@@ -372,10 +372,10 @@ export default function ResponsePlansPage() {
 
       {/* ── Plan Changes & Reallocations Section ── */}
       <div className="panel p-5 space-y-3">
-        <div className="flex items-center justify-between border-b border-edge pb-2.5">
+        <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
           <div className="flex items-center gap-2">
-            <span className="text-amber-400 text-base">⚡</span>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
+            <span className="text-amber-600 text-base">⚡</span>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800">
               Recent Plan Changes & Dynamic Reallocations
             </h3>
           </div>
@@ -391,15 +391,15 @@ export default function ResponsePlansPage() {
             const isAdded = chg.type === 'added'
 
             const badgeColor = isReassigned
-              ? 'text-amber-300 bg-amber-500/15 border-amber-500/40'
+              ? 'text-amber-800 bg-amber-50 border-amber-200'
               : isDispatched
-              ? 'text-sky-300 bg-sky-500/15 border-sky-500/40'
-              : 'text-emerald-300 bg-emerald-500/15 border-emerald-500/40'
+              ? 'text-sky-800 bg-sky-50 border-sky-200'
+              : 'text-emerald-800 bg-emerald-50 border-emerald-200'
 
             return (
               <div
                 key={chg.id}
-                className="flex items-start gap-3 rounded-xl border border-edge bg-panel2/50 p-3"
+                className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50/70 p-3"
               >
                 <span
                   className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase mono border flex-shrink-0 ${badgeColor}`}
@@ -407,7 +407,7 @@ export default function ResponsePlansPage() {
                   {chg.type}
                 </span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium text-slate-200 leading-snug">
+                  <p className="text-xs font-semibold text-slate-800 leading-snug">
                     {chg.description}
                   </p>
                   <span className="mono text-[10px] text-slate-500 mt-1 block">
@@ -424,9 +424,9 @@ export default function ResponsePlansPage() {
       <div className="panel overflow-hidden">
         <div className="panel-title flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-red-400">🚨</span>
-            <span>Incidents Covered Under {currentPlan.plan_id}</span>
-            <span className="mono rounded-full bg-edge px-2 py-0.5 text-[10px] text-slate-400">
+            <span className="text-red-600">🚨</span>
+            <span className="text-slate-900 font-bold">Incidents Covered Under {currentPlan.plan_id}</span>
+            <span className="mono rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-700 font-bold">
               {planIncidents.length} active
             </span>
           </div>
@@ -447,7 +447,7 @@ export default function ResponsePlansPage() {
                 <th>Assigned Units</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-edge/50">
+            <tbody className="divide-y divide-slate-100">
               {planIncidents.map((inc) => {
                 const sev = SEVERITY[inc.severity] || SEVERITY.medium
                 const isCrit = inc.severity === 'critical'
@@ -455,9 +455,9 @@ export default function ResponsePlansPage() {
                 const icon = INCIDENT_ICON[inc.type] || '⚠'
 
                 return (
-                  <tr key={inc.id} className="hover:bg-panel2/60 transition-colors">
+                  <tr key={inc.id} className="hover:bg-slate-50 transition-colors">
                     {/* ID */}
-                    <td className="mono font-bold text-xs text-white">
+                    <td className="mono font-bold text-xs text-slate-900">
                       <div className="flex items-center gap-2">
                         <span
                           className={`h-2 w-2 rounded-full flex-shrink-0 ${isCrit ? 'animate-flash' : ''}`}
@@ -471,7 +471,7 @@ export default function ResponsePlansPage() {
                     <td>
                       <div className="flex items-center gap-2">
                         <span className="text-base">{icon}</span>
-                        <span className="text-xs font-semibold text-slate-200 capitalize">
+                        <span className="text-xs font-semibold text-slate-800 capitalize">
                           {pretty(inc.type)}
                         </span>
                       </div>
@@ -480,10 +480,10 @@ export default function ResponsePlansPage() {
                     {/* Severity */}
                     <td>
                       <span
-                        className="badge text-[10px]"
+                        className="badge text-[10px] font-bold"
                         style={{
                           color: sev.color,
-                          borderColor: `${sev.color}45`,
+                          borderColor: `${sev.color}35`,
                           background: `${sev.color}15`,
                         }}
                       >
@@ -492,18 +492,18 @@ export default function ResponsePlansPage() {
                     </td>
 
                     {/* Location */}
-                    <td className="text-xs text-slate-300">
+                    <td className="text-xs text-slate-700 font-medium">
                       📍 {inc.location_name}
                     </td>
 
                     {/* Status */}
                     <td>
                       <span
-                        className={`badge text-[10px] ${isWaiting ? 'animate-flash' : ''}`}
+                        className={`badge text-[10px] font-bold ${isWaiting ? 'animate-flash' : ''}`}
                         style={
                           isWaiting
-                            ? { color: '#c084fc', borderColor: '#c084fc45', background: '#c084fc15' }
-                            : { color: '#38bdf8', borderColor: '#38bdf845', background: '#38bdf815' }
+                            ? { color: '#7c3aed', borderColor: '#7c3aed35', background: '#7c3aed15' }
+                            : { color: '#0284c7', borderColor: '#0284c735', background: '#0284c715' }
                         }
                       >
                         {isWaiting ? '⏳ Waiting' : 'Assigned'}
@@ -517,13 +517,13 @@ export default function ResponsePlansPage() {
                           inc.assigned_resources.map((r) => (
                             <span
                               key={r}
-                              className="mono text-[10px] font-bold text-sky-300 bg-sky-500/10 border border-sky-500/30 rounded px-1.5 py-0.5"
+                              className="mono text-[10px] font-bold text-sky-800 bg-sky-50 border border-sky-200 rounded px-1.5 py-0.5"
                             >
                               {r}
                             </span>
                           ))
                         ) : (
-                          <span className="text-[11px] text-slate-500 italic">None assigned</span>
+                          <span className="text-[11px] text-slate-400 italic">None assigned</span>
                         )}
                       </div>
                     </td>
@@ -539,9 +539,9 @@ export default function ResponsePlansPage() {
       <div className="panel overflow-hidden">
         <div className="panel-title flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <span className="text-sky-400">🚒</span>
-            <span>Resource Allocations & Vector Routes</span>
-            <span className="mono rounded-full bg-edge px-2 py-0.5 text-[10px] text-slate-400">
+            <span className="text-sky-600">🚒</span>
+            <span className="text-slate-900 font-bold">Resource Allocations & Vector Routes</span>
+            <span className="mono rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-700 font-bold">
               {filteredAssignments.length} units
             </span>
           </div>
@@ -555,8 +555,8 @@ export default function ResponsePlansPage() {
                 onClick={() => setAssignmentFilter(ft)}
                 className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold transition-all ${
                   assignmentFilter === ft
-                    ? 'bg-sky-500/20 text-sky-300 border border-sky-500/40'
-                    : 'text-slate-500 hover:text-slate-300'
+                    ? 'bg-sky-50 text-sky-800 border border-sky-200 font-bold shadow-xs'
+                    : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
                 {ft === 'all' ? 'All' : prettyCap(ft)}
@@ -577,7 +577,7 @@ export default function ResponsePlansPage() {
                 <th>Rationale / Selection Reason</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-edge/50">
+            <tbody className="divide-y divide-slate-100">
               {filteredAssignments.map((asn) => {
                 const icon = RESOURCE_ICON[asn.resource_type] || '🚚'
                 const typeLabel =
@@ -585,10 +585,10 @@ export default function ResponsePlansPage() {
                 const isUrgent = asn.eta <= 3
 
                 return (
-                  <tr key={asn.id} className="hover:bg-panel2/60 transition-colors">
+                  <tr key={asn.id} className="hover:bg-slate-50 transition-colors">
                     {/* Resource ID */}
-                    <td className="mono font-bold text-xs text-white">
-                      <span className="rounded bg-edge/80 px-2 py-0.5 border border-edge-2">
+                    <td className="mono font-bold text-xs text-slate-900">
+                      <span className="rounded bg-slate-100 px-2 py-0.5 border border-slate-200">
                         {asn.resource_id}
                       </span>
                     </td>
@@ -597,7 +597,7 @@ export default function ResponsePlansPage() {
                     <td>
                       <div className="flex items-center gap-2">
                         <span className="text-base">{icon}</span>
-                        <span className="text-xs font-semibold text-slate-300">
+                        <span className="text-xs font-semibold text-slate-800">
                           {typeLabel}
                         </span>
                       </div>
@@ -605,14 +605,14 @@ export default function ResponsePlansPage() {
 
                     {/* Assigned Incident */}
                     <td>
-                      <span className="mono text-xs font-bold text-sky-300 bg-sky-500/15 border border-sky-500/35 rounded px-2 py-0.5">
+                      <span className="mono text-xs font-bold text-sky-800 bg-sky-50 border border-sky-200 rounded px-2 py-0.5">
                         {asn.incident_id}
                       </span>
                     </td>
 
                     {/* Status */}
                     <td>
-                      <span className="badge text-[10px] text-sky-300 border-sky-500/40 bg-sky-500/10">
+                      <span className="badge text-[10px] text-sky-800 border-sky-200 bg-sky-50 font-bold">
                         {asn.status === 'on_scene' ? '✓ On Scene' : asn.status}
                       </span>
                     </td>
@@ -621,7 +621,7 @@ export default function ResponsePlansPage() {
                     <td>
                       <span
                         className={`mono text-xs font-bold ${
-                          isUrgent ? 'text-emerald-400' : 'text-slate-300'
+                          isUrgent ? 'text-emerald-700' : 'text-slate-700'
                         }`}
                       >
                         {asn.eta} min{asn.eta === 1 ? '' : 's'}
@@ -629,7 +629,7 @@ export default function ResponsePlansPage() {
                     </td>
 
                     {/* Rationale */}
-                    <td className="text-xs text-slate-400">
+                    <td className="text-xs text-slate-600 font-medium">
                       {asn.reason}
                     </td>
                   </tr>
@@ -642,32 +642,32 @@ export default function ResponsePlansPage() {
 
       {/* ── View Details Modal ── */}
       {isDetailsModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-xs p-4">
           <div
             className="absolute inset-0"
             onClick={() => setIsDetailsModalOpen(false)}
             aria-label="Close modal overlay"
           />
 
-          <div className="relative z-10 w-full max-w-2xl rounded-2xl border border-edge bg-surface shadow-2xl overflow-hidden slide-up max-h-[90vh] flex flex-col">
+          <div className="relative z-10 w-full max-w-2xl rounded-2xl border border-slate-200 bg-white shadow-2xl overflow-hidden slide-up max-h-[90vh] flex flex-col">
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-edge bg-panel px-6 py-4">
+            <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-6 py-4">
               <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/30 text-xl">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-50 text-sky-700 border border-sky-200 text-xl">
                   📋
                 </span>
                 <div>
-                  <h3 className="text-sm font-bold text-white tracking-wide">
+                  <h3 className="text-sm font-bold text-slate-900 tracking-wide">
                     Optimization Plan Details · {currentPlan.plan_id}
                   </h3>
-                  <p className="mono text-[11px] text-slate-400 mt-0.5">
+                  <p className="mono text-[11px] text-slate-500 mt-0.5">
                     Linear Program Solver Diagnostics & Constraint Audit
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setIsDetailsModalOpen(false)}
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-edge-2 bg-panel2 text-slate-400 hover:text-white transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-400 hover:text-slate-700 transition-colors"
               >
                 ✕
               </button>
@@ -676,63 +676,63 @@ export default function ResponsePlansPage() {
             {/* Body */}
             <div className="flex-1 overflow-y-auto p-6 space-y-4 text-xs">
               <div className="panel p-4 space-y-2">
-                <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
                   Optimization Strategy & Rationale
                 </h4>
-                <p className="text-sm text-slate-200 leading-relaxed">
+                <p className="text-sm text-slate-800 leading-relaxed font-medium">
                   {currentPlan.explanation}
                 </p>
               </div>
 
               {/* Solver Metrics Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="rounded-lg bg-panel2/60 border border-edge p-3">
+                <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
                   <span className="text-[10px] text-slate-500 uppercase font-bold block">
                     Solver Engine
                   </span>
-                  <span className="font-semibold text-slate-200 mt-1 block">PuLP + CBC</span>
+                  <span className="font-semibold text-slate-800 mt-1 block">PuLP + CBC</span>
                 </div>
-                <div className="rounded-lg bg-panel2/60 border border-edge p-3">
+                <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
                   <span className="text-[10px] text-slate-500 uppercase font-bold block">
                     Objective Score
                   </span>
-                  <span className="mono font-bold text-sky-400 mt-1 block">
+                  <span className="mono font-bold text-sky-800 mt-1 block">
                     {currentPlan.objective_value}
                   </span>
                 </div>
-                <div className="rounded-lg bg-panel2/60 border border-edge p-3">
+                <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
                   <span className="text-[10px] text-slate-500 uppercase font-bold block">
                     Solve Time
                   </span>
-                  <span className="mono font-bold text-emerald-400 mt-1 block">187 ms</span>
+                  <span className="mono font-bold text-emerald-700 mt-1 block">187 ms</span>
                 </div>
-                <div className="rounded-lg bg-panel2/60 border border-edge p-3">
+                <div className="rounded-lg bg-slate-50 border border-slate-200 p-3">
                   <span className="text-[10px] text-slate-500 uppercase font-bold block">
                     Constraints Met
                   </span>
-                  <span className="mono font-bold text-slate-200 mt-1 block">34 / 36</span>
+                  <span className="mono font-bold text-slate-800 mt-1 block">34 / 36</span>
                 </div>
               </div>
 
               {/* Shortage Flags */}
               {currentPlan.unassigned_incidents && (
-                <div className="panel p-4 space-y-2 border-red-500/30 bg-red-500/5">
-                  <h4 className="text-[11px] font-bold uppercase tracking-wider text-red-400 flex items-center gap-2">
+                <div className="panel p-4 space-y-2 border-red-200 bg-red-50/50">
+                  <h4 className="text-[11px] font-bold uppercase tracking-wider text-red-700 flex items-center gap-2">
                     <span>⚠</span> Resource Shortage Constraints Flagged
                   </h4>
                   <div className="space-y-1.5 pt-1">
                     {currentPlan.unassigned_incidents.map((u, i) => (
                       <div
                         key={i}
-                        className="flex items-start justify-between gap-2 p-2 rounded bg-panel2/60 border border-edge text-xs"
+                        className="flex items-start justify-between gap-2 p-2 rounded bg-white border border-red-200 text-xs"
                       >
                         <div>
-                          <span className="mono font-bold text-white mr-2">
+                          <span className="mono font-bold text-slate-900 mr-2">
                             {u.incident_id}
                           </span>
-                          <span className="text-slate-300">{u.reason}</span>
+                          <span className="text-slate-700 font-medium">{u.reason}</span>
                         </div>
-                        <span className="badge text-[10px] text-red-300 border-red-500/40 bg-red-500/10">
+                        <span className="badge text-[10px] text-red-700 border-red-200 bg-red-50 font-bold">
                           {u.missing_resources.join(', ')}
                         </span>
                       </div>
@@ -743,7 +743,7 @@ export default function ResponsePlansPage() {
             </div>
 
             {/* Footer */}
-            <div className="border-t border-edge bg-panel px-6 py-3.5 flex items-center justify-end">
+            <div className="border-t border-slate-200 bg-slate-50 px-6 py-3.5 flex items-center justify-end">
               <button
                 onClick={() => setIsDetailsModalOpen(false)}
                 className="btn px-4 py-2 text-xs"
@@ -759,16 +759,17 @@ export default function ResponsePlansPage() {
       {toast && (
         <div className="fixed bottom-6 right-6 z-50 slide-in">
           <div
-            className="toast flex items-center gap-3 bg-panel border-edge shadow-2xl"
+            className="toast flex items-center gap-3 bg-white border border-slate-200 shadow-2xl rounded-xl p-3"
             style={{
-              borderLeftColor: toast.type === 'success' ? '#22c55e' : '#38bdf8',
+              borderLeftColor: toast.type === 'success' ? '#16a34a' : '#0284c7',
+              borderLeftWidth: '4px',
             }}
           >
             <span className="text-base">{toast.type === 'success' ? '✅' : 'ℹ️'}</span>
-            <span className="text-xs text-slate-200">{toast.message}</span>
+            <span className="text-xs font-semibold text-slate-800">{toast.message}</span>
             <button
               onClick={() => setToast(null)}
-              className="text-slate-500 hover:text-white text-xs ml-2"
+              className="text-slate-400 hover:text-slate-700 text-xs ml-2"
             >
               ✕
             </button>

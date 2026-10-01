@@ -10,12 +10,17 @@ No database, no AI, no optimization.
 """
 from typing import List, Optional
 
-from fastapi import APIRouter, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 
+from api.auth_deps import check_authority_or_open
 from schemas.alert import AlertCreate, AlertResponse, AlertUpdate
 from services.alert_store import alert_store
 
-router = APIRouter(prefix="/alerts", tags=["Alerts"])
+router = APIRouter(
+    prefix="/alerts",
+    tags=["Alerts"],
+    dependencies=[Depends(check_authority_or_open)],
+)
 
 
 # ---------------------------------------------------------------------------

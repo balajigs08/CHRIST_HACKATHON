@@ -154,36 +154,36 @@ export default function LiveMapPage() {
     <div className="space-y-3">
 
       {/* ── Top Status Bar ── */}
-      <div className="panel px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 bg-panel/90 backdrop-blur-md">
+      <div className="panel px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 bg-white">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="mono text-xs font-bold text-white tracking-wider uppercase">
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="mono text-xs font-bold text-slate-900 tracking-wider uppercase">
               Tactical Grid · Bengaluru Central Command
             </span>
           </div>
-          <span className="text-slate-700 hidden sm:inline">|</span>
-          <span className="mono text-[11px] text-slate-400 hidden sm:inline">
+          <span className="text-slate-300 hidden sm:inline">|</span>
+          <span className="mono text-[11px] text-slate-500 hidden sm:inline">
             Telemetry Time: {fmtTime(MOCK_SIM_TIME)}
           </span>
         </div>
 
         {/* Status Counters */}
         <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
-          <div className="flex items-center gap-1.5 rounded-lg border border-edge bg-panel2/60 px-2.5 py-1 text-xs">
-            <span className="text-orange-400 text-sm">⚠</span>
-            <span className="text-slate-400">Active Incidents:</span>
-            <span className="mono font-bold text-white">{stats.activeIncidents}</span>
+          <div className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs">
+            <span className="text-orange-600 text-sm">⚠</span>
+            <span className="text-slate-600">Active Incidents:</span>
+            <span className="mono font-bold text-slate-900">{stats.activeIncidents}</span>
           </div>
 
-          <div className="flex items-center gap-1.5 rounded-lg border border-edge bg-panel2/60 px-2.5 py-1 text-xs">
-            <span className="text-sky-400 text-sm">🚒</span>
-            <span className="text-slate-400">Deployed Fleet:</span>
-            <span className="mono font-bold text-sky-300">{stats.resourcesDeployed}</span>
+          <div className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs">
+            <span className="text-sky-600 text-sm">🚒</span>
+            <span className="text-slate-600">Deployed Fleet:</span>
+            <span className="mono font-bold text-sky-800">{stats.resourcesDeployed}</span>
           </div>
 
           {stats.criticalAlerts > 0 && (
-            <div className="flex items-center gap-1.5 rounded-lg border border-red-500/30 bg-red-500/10 px-2.5 py-1 text-xs text-red-300 animate-flash">
+            <div className="flex items-center gap-1.5 rounded-lg border border-red-200 bg-red-50 px-2.5 py-1 text-xs text-red-700 animate-flash">
               <span>🚨</span>
               <span className="font-semibold">Critical Approvals:</span>
               <span className="mono font-bold">{stats.criticalAlerts}</span>
@@ -203,8 +203,8 @@ export default function LiveMapPage() {
             onClick={() => setShowIncidents((v) => !v)}
             className={`rounded-lg px-2.5 py-1 text-xs font-semibold border transition-all ${
               showIncidents
-                ? 'border-orange-500/50 bg-orange-500/15 text-orange-200'
-                : 'border-edge bg-panel2/40 text-slate-500 hover:text-slate-300'
+                ? 'border-orange-300 bg-orange-50 text-orange-800 font-bold shadow-xs'
+                : 'border-slate-200 bg-slate-50 text-slate-600 hover:text-slate-900'
             }`}
           >
             {showIncidents ? '✓ ' : ''}Incidents ({visibleIncidents.length})
@@ -214,22 +214,22 @@ export default function LiveMapPage() {
             onClick={() => setShowResources((v) => !v)}
             className={`rounded-lg px-2.5 py-1 text-xs font-semibold border transition-all ${
               showResources
-                ? 'border-sky-500/50 bg-sky-500/15 text-sky-200'
-                : 'border-edge bg-panel2/40 text-slate-500 hover:text-slate-300'
+                ? 'border-sky-300 bg-sky-50 text-sky-800 font-bold shadow-xs'
+                : 'border-slate-200 bg-slate-50 text-slate-600 hover:text-slate-900'
             }`}
           >
             {showResources ? '✓ ' : ''}Fleet Resources ({visibleResources.length})
           </button>
 
-          <div className="h-4 w-px bg-edge mx-1 hidden sm:block" />
+          <div className="h-4 w-px bg-slate-200 mx-1 hidden sm:block" />
 
           {/* Quick Sub-filters */}
           <button
             onClick={() => setFilterCritical((v) => !v)}
             className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold border transition-all ${
               filterCritical
-                ? 'border-red-500/40 bg-red-500/15 text-red-300'
-                : 'border-edge text-slate-600'
+                ? 'border-red-200 bg-red-50 text-red-700 font-bold'
+                : 'border-slate-200 text-slate-400 bg-white'
             }`}
           >
             Critical
@@ -239,8 +239,8 @@ export default function LiveMapPage() {
             onClick={() => setFilterHigh((v) => !v)}
             className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold border transition-all ${
               filterHigh
-                ? 'border-orange-500/40 bg-orange-500/15 text-orange-300'
-                : 'border-edge text-slate-600'
+                ? 'border-orange-200 bg-orange-50 text-orange-800 font-bold'
+                : 'border-slate-200 text-slate-400 bg-white'
             }`}
           >
             High
@@ -250,8 +250,8 @@ export default function LiveMapPage() {
             onClick={() => setFilterAvailable((v) => !v)}
             className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold border transition-all ${
               filterAvailable
-                ? 'border-emerald-500/40 bg-emerald-500/15 text-emerald-300'
-                : 'border-edge text-slate-600'
+                ? 'border-emerald-200 bg-emerald-50 text-emerald-800 font-bold'
+                : 'border-slate-200 text-slate-400 bg-white'
             }`}
           >
             Available
@@ -261,8 +261,8 @@ export default function LiveMapPage() {
             onClick={() => setFilterAssigned((v) => !v)}
             className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold border transition-all ${
               filterAssigned
-                ? 'border-sky-500/40 bg-sky-500/15 text-sky-300'
-                : 'border-edge text-slate-600'
+                ? 'border-sky-200 bg-sky-50 text-sky-800 font-bold'
+                : 'border-slate-200 text-slate-400 bg-white'
             }`}
           >
             Assigned
@@ -274,8 +274,8 @@ export default function LiveMapPage() {
             onClick={() => setLegendOpen((v) => !v)}
             className={`rounded-md px-2 py-1 text-[11px] font-semibold border transition-all ${
               legendOpen
-                ? 'border-sky-500/40 bg-sky-500/15 text-sky-300'
-                : 'border-edge text-slate-500 hover:text-slate-300'
+                ? 'border-sky-200 bg-sky-50 text-sky-800'
+                : 'border-slate-200 bg-white text-slate-600 hover:text-slate-900'
             }`}
           >
             🗺 Legend {legendOpen ? '▾' : '▸'}
@@ -287,35 +287,35 @@ export default function LiveMapPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-start">
         
         {/* MAP CANVAS CONTAINER */}
-        <div className="lg:col-span-8 xl:col-span-8 panel p-0 overflow-hidden relative select-none">
+        <div className="lg:col-span-8 xl:col-span-8 panel p-0 overflow-hidden relative select-none border-slate-200">
           
           {/* Map Controls Floating Toolbar */}
-          <div className="absolute top-3 right-3 z-30 flex flex-col gap-1.5 bg-surface/90 backdrop-blur-md p-1.5 rounded-xl border border-edge shadow-xl">
+          <div className="absolute top-3 right-3 z-30 flex flex-col gap-1.5 bg-white/95 p-1.5 rounded-xl border border-slate-200 shadow-md">
             <button
               onClick={handleZoomIn}
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-panel2 text-slate-300 hover:text-white hover:bg-edge text-base font-bold transition-all"
+              className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-700 hover:text-slate-900 hover:bg-slate-200 text-base font-bold transition-all"
               title="Zoom In (+)"
             >
               +
             </button>
             <button
               onClick={handleZoomOut}
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-panel2 text-slate-300 hover:text-white hover:bg-edge text-base font-bold transition-all"
+              className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-700 hover:text-slate-900 hover:bg-slate-200 text-base font-bold transition-all"
               title="Zoom Out (-)"
             >
               −
             </button>
-            <div className="h-px bg-edge my-0.5" />
+            <div className="h-px bg-slate-200 my-0.5" />
             <button
               onClick={handleCenter}
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-panel2 text-slate-300 hover:text-white hover:bg-edge text-xs font-bold transition-all"
+              className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-700 hover:text-slate-900 hover:bg-slate-200 text-xs font-bold transition-all"
               title="Center / Locate Selected (⌖)"
             >
               ⌖
             </button>
             <button
               onClick={handleResetView}
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-panel2 text-slate-300 hover:text-white hover:bg-edge text-xs font-bold transition-all"
+              className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-700 hover:text-slate-900 hover:bg-slate-200 text-xs font-bold transition-all"
               title="Reset View (⟲)"
             >
               ⟲
@@ -323,32 +323,32 @@ export default function LiveMapPage() {
           </div>
 
           {/* Tactical Zoom Indicator */}
-          <div className="absolute top-3 left-3 z-20 pointer-events-none flex items-center gap-2 bg-surface/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-edge text-[11px] mono text-slate-400">
-            <span className="text-sky-400 font-bold">GRID ZOOM: {Math.round(zoom * 100)}%</span>
+          <div className="absolute top-3 left-3 z-20 pointer-events-none flex items-center gap-2 bg-white/90 px-2.5 py-1 rounded-lg border border-slate-200 text-[11px] mono text-slate-600 font-bold shadow-xs">
+            <span className="text-sky-700 font-bold">GRID ZOOM: {Math.round(zoom * 100)}%</span>
             <span>·</span>
             <span>SECTOR 4</span>
           </div>
 
           {/* Compass / Cardinal Rose */}
-          <div className="absolute bottom-3 right-3 z-20 pointer-events-none flex flex-col items-center justify-center bg-surface/80 backdrop-blur-md h-12 w-12 rounded-full border border-edge text-[10px] mono text-slate-400">
-            <span className="text-sky-400 font-bold -mb-1">N</span>
-            <div className="flex items-center gap-1.5 text-[8px] text-slate-600">
+          <div className="absolute bottom-3 right-3 z-20 pointer-events-none flex flex-col items-center justify-center bg-white/90 h-12 w-12 rounded-full border border-slate-200 text-[10px] mono text-slate-600 shadow-xs">
+            <span className="text-sky-700 font-bold -mb-1">N</span>
+            <div className="flex items-center gap-1.5 text-[8px] text-slate-400">
               <span>W</span>
-              <span className="text-slate-400 text-xs">⌖</span>
+              <span className="text-slate-600 text-xs">⌖</span>
               <span>E</span>
             </div>
-            <span className="text-[8px] text-slate-600 -mt-1">S</span>
+            <span className="text-[8px] text-slate-400 -mt-1">S</span>
           </div>
 
           {/* Scale Indicator */}
-          <div className="absolute bottom-3 left-3 z-20 pointer-events-none flex items-center gap-2 bg-surface/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-edge text-[10px] mono text-slate-400">
+          <div className="absolute bottom-3 left-3 z-20 pointer-events-none flex items-center gap-2 bg-white/90 px-2.5 py-1 rounded-lg border border-slate-200 text-[10px] mono text-slate-600 shadow-xs">
             <div className="w-12 h-1 border-b-2 border-l-2 border-r-2 border-slate-400" />
             <span>2.5 KM</span>
           </div>
 
           {/* MAP CANVAS (SVG) */}
           <div
-            className={`w-full overflow-hidden bg-[#060e1b] ${
+            className={`w-full overflow-hidden bg-slate-100 ${
               isDragging ? 'cursor-grabbing' : 'cursor-grab'
             }`}
             style={{ minHeight: '560px' }}
@@ -369,25 +369,25 @@ export default function LiveMapPage() {
               <defs>
                 {/* Tactical grid pattern */}
                 <pattern id="tacgrid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(28,46,71,0.6)" strokeWidth="0.5" />
-                  <circle cx="0" cy="0" r="1" fill="rgba(56,189,248,0.3)" />
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(148,163,184,0.3)" strokeWidth="0.5" />
+                  <circle cx="0" cy="0" r="1" fill="rgba(2,132,199,0.3)" />
                 </pattern>
                 
                 {/* Secondary fine grid */}
                 <pattern id="finegrid" width="10" height="10" patternUnits="userSpaceOnUse">
-                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(28,46,71,0.2)" strokeWidth="0.3" />
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(148,163,184,0.15)" strokeWidth="0.3" />
                 </pattern>
 
                 {/* Radar radar glow */}
                 <radialGradient id="center-radar" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="rgba(56,189,248,0.08)" />
-                  <stop offset="60%" stopColor="rgba(56,189,248,0.02)" />
+                  <stop offset="0%" stopColor="rgba(2,132,199,0.06)" />
+                  <stop offset="60%" stopColor="rgba(2,132,199,0.01)" />
                   <stop offset="100%" stopColor="transparent" />
                 </radialGradient>
               </defs>
 
               {/* Background layers */}
-              <rect width={W} height={H} fill="#050c18" />
+              <rect width={W} height={H} fill="#f8fafc" />
               <rect width={W} height={H} fill="url(#finegrid)" />
               <rect width={W} height={H} fill="url(#tacgrid)" />
               <circle cx={W / 2} cy={H / 2} r={W * 0.45} fill="url(#center-radar)" />
@@ -400,33 +400,33 @@ export default function LiveMapPage() {
                   cy={H / 2}
                   r={r}
                   fill="none"
-                  stroke="rgba(28,52,82,0.5)"
+                  stroke="rgba(148,163,184,0.4)"
                   strokeWidth="0.8"
                   strokeDasharray="4 6"
                 />
               ))}
 
               {/* Major arterial expressway lines (simulated) */}
-              <g stroke="rgba(37,60,92,0.85)" strokeWidth="6" strokeLinecap="round">
+              <g stroke="rgba(203,213,225,0.9)" strokeWidth="6" strokeLinecap="round">
                 <path d={`M ${PAD} ${H * 0.3} Q ${W * 0.4} ${H * 0.28} ${W - PAD} ${H * 0.35}`} fill="none" />
                 <path d={`M ${W * 0.3} ${PAD} Q ${W * 0.35} ${H * 0.5} ${W * 0.28} ${H - PAD}`} fill="none" />
                 <path d={`M ${PAD} ${H * 0.72} L ${W - PAD} ${H * 0.68}`} fill="none" />
                 <path d={`M ${W * 0.7} ${PAD} L ${W * 0.72} ${H - PAD}`} fill="none" />
                 {/* Diagonal Outer Ring Road link */}
-                <path d={`M ${W * 0.15} ${H * 0.85} L ${W * 0.85} ${H * 0.15}`} fill="none" strokeWidth="3" strokeDasharray="8 4" stroke="rgba(56,189,248,0.25)" />
+                <path d={`M ${W * 0.15} ${H * 0.85} L ${W * 0.85} ${H * 0.15}`} fill="none" strokeWidth="3" strokeDasharray="8 4" stroke="rgba(2,132,199,0.3)" />
               </g>
 
               {/* Tactical Zone Labels */}
-              <text x={PAD + 20} y={PAD + 20} fill="rgba(100,116,139,0.4)" fontSize="10" className="mono" fontWeight="bold">
+              <text x={PAD + 20} y={PAD + 20} fill="rgba(100,116,139,0.5)" fontSize="10" className="mono" fontWeight="bold">
                 ZONE 1 · CBD NORTH
               </text>
-              <text x={W - PAD - 120} y={PAD + 20} fill="rgba(100,116,139,0.4)" fontSize="10" className="mono" fontWeight="bold">
+              <text x={W - PAD - 120} y={PAD + 20} fill="rgba(100,116,139,0.5)" fontSize="10" className="mono" fontWeight="bold">
                 ZONE 2 · WHITEFIELD
               </text>
-              <text x={PAD + 20} y={H - PAD - 10} fill="rgba(100,116,139,0.4)" fontSize="10" className="mono" fontWeight="bold">
+              <text x={PAD + 20} y={H - PAD - 10} fill="rgba(100,116,139,0.5)" fontSize="10" className="mono" fontWeight="bold">
                 ZONE 3 · SOUTH KORAMANGALA
               </text>
-              <text x={W - PAD - 120} y={H - PAD - 10} fill="rgba(100,116,139,0.4)" fontSize="10" className="mono" fontWeight="bold">
+              <text x={W - PAD - 120} y={H - PAD - 10} fill="rgba(100,116,139,0.5)" fontSize="10" className="mono" fontWeight="bold">
                 ZONE 4 · BELLANDUR SECTOR
               </text>
 
@@ -446,9 +446,9 @@ export default function LiveMapPage() {
                       y1={rp[1]}
                       x2={ip[0]}
                       y2={ip[1]}
-                      stroke="#38bdf8"
+                      stroke="#0284c7"
                       strokeWidth={isSelectedLine ? '5' : '3'}
-                      opacity={isSelectedLine ? 0.35 : 0.1}
+                      opacity={isSelectedLine ? 0.35 : 0.15}
                     />
                     {/* Animated dashed vector line */}
                     <line
@@ -456,10 +456,10 @@ export default function LiveMapPage() {
                       y1={rp[1]}
                       x2={ip[0]}
                       y2={ip[1]}
-                      stroke="#38bdf8"
+                      stroke="#0284c7"
                       strokeWidth={isSelectedLine ? '2' : '1.2'}
                       strokeDasharray="5 5"
-                      opacity={isSelectedLine ? 0.95 : 0.6}
+                      opacity={isSelectedLine ? 0.95 : 0.7}
                     />
                   </g>
                 )
@@ -491,7 +491,7 @@ export default function LiveMapPage() {
                         cy={p[1]}
                         r="20"
                         fill="none"
-                        stroke="#38bdf8"
+                        stroke="#0284c7"
                         strokeWidth="2"
                         strokeDasharray="4 2"
                         className="animate-spin"
@@ -506,10 +506,11 @@ export default function LiveMapPage() {
                       width="26"
                       height="26"
                       rx="7"
-                      fill="#071322"
+                      fill="#ffffff"
                       stroke={st.color}
                       strokeWidth={isSelected ? '2.5' : '1.5'}
                       className="transition-all"
+                      style={{ filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.12))' }}
                     />
 
                     {/* Status dot in corner */}
@@ -518,7 +519,7 @@ export default function LiveMapPage() {
                       cy={p[1] - 9}
                       r="3.5"
                       fill={st.color}
-                      stroke="#071322"
+                      stroke="#ffffff"
                       strokeWidth="1"
                     />
 
@@ -540,7 +541,7 @@ export default function LiveMapPage() {
                       width="28"
                       height="12"
                       rx="3"
-                      fill="rgba(7,19,34,0.9)"
+                      fill="rgba(255,255,255,0.95)"
                       stroke={st.color}
                       strokeWidth="0.5"
                     />
@@ -585,7 +586,7 @@ export default function LiveMapPage() {
                         cy={p[1]}
                         r="28"
                         fill={sev.color}
-                        opacity="0.16"
+                        opacity="0.2"
                         className="animate-pulse"
                       />
                     )}
@@ -597,7 +598,7 @@ export default function LiveMapPage() {
                         cy={p[1]}
                         r="22"
                         fill="none"
-                        stroke="#ffffff"
+                        stroke="#0f172a"
                         strokeWidth="2"
                         strokeDasharray="4 2"
                       />
@@ -609,11 +610,10 @@ export default function LiveMapPage() {
                       cy={p[1]}
                       r={isCrit ? '14' : '12'}
                       fill={sev.color}
-                      stroke="#060e1b"
+                      stroke="#ffffff"
                       strokeWidth="2.5"
                       style={{
-                        boxShadow: `0 0 12px ${sev.color}`,
-                        filter: `drop-shadow(0 0 6px ${sev.color})`,
+                        filter: `drop-shadow(0 2px 5px rgba(0,0,0,0.2))`,
                       }}
                     />
 
@@ -635,7 +635,7 @@ export default function LiveMapPage() {
                       width="52"
                       height="18"
                       rx="4"
-                      fill="rgba(6,14,27,0.95)"
+                      fill="rgba(255,255,255,0.95)"
                       stroke={sev.color}
                       strokeWidth="1"
                     />
@@ -646,7 +646,7 @@ export default function LiveMapPage() {
                       fontSize="9"
                       fontWeight="bold"
                       className="mono"
-                      fill="#f8fafc"
+                      fill="#0f172a"
                     >
                       {inc.id}
                     </text>
@@ -658,14 +658,14 @@ export default function LiveMapPage() {
 
           {/* ── Map Legend Drawer ── */}
           {legendOpen && (
-            <div className="absolute bottom-12 left-3 z-30 w-72 rounded-xl border border-edge bg-panel/95 backdrop-blur-xl p-3 shadow-2xl slide-up text-xs space-y-2">
-              <div className="flex items-center justify-between border-b border-edge/60 pb-1.5">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+            <div className="absolute bottom-12 left-3 z-30 w-72 rounded-xl border border-slate-200 bg-white/95 backdrop-blur-xl p-3 shadow-xl slide-up text-xs space-y-2">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-1.5">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
                   Tactical Map Legend
                 </span>
                 <button
                   onClick={() => setLegendOpen(false)}
-                  className="text-slate-500 hover:text-slate-300 text-xs"
+                  className="text-slate-400 hover:text-slate-700 text-xs"
                 >
                   ✕
                 </button>
@@ -673,43 +673,43 @@ export default function LiveMapPage() {
 
               <div className="space-y-1.5 text-[11px]">
                 <div className="flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-full bg-red-500 animate-pulse border border-white" />
-                  <span className="text-slate-200 font-semibold">Critical Incident</span>
-                  <span className="text-slate-500 text-[10px] ml-auto">P1 Urgent</span>
+                  <span className="h-3 w-3 rounded-full bg-red-500 border border-white" />
+                  <span className="text-slate-800 font-semibold">Critical Incident</span>
+                  <span className="text-red-600 text-[10px] font-bold ml-auto">P1 Urgent</span>
                 </div>
 
                 <div className="flex items-center gap-2">
                   <span className="h-3 w-3 rounded-full bg-orange-500" />
-                  <span className="text-slate-200">High-Priority Incident</span>
+                  <span className="text-slate-800 font-medium">High-Priority Incident</span>
                   <span className="text-slate-500 text-[10px] ml-auto">P2</span>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-md border border-emerald-400 bg-emerald-500/20 text-[9px] flex items-center justify-center font-bold text-emerald-400">
+                  <span className="h-3 w-3 rounded-md border border-emerald-500 bg-emerald-50 text-[9px] flex items-center justify-center font-bold text-emerald-700">
                     A
                   </span>
-                  <span className="text-slate-200">Available Resource</span>
-                  <span className="text-emerald-400 text-[10px] ml-auto">Standby</span>
+                  <span className="text-slate-800 font-medium">Available Resource</span>
+                  <span className="text-emerald-700 text-[10px] font-bold ml-auto">Standby</span>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-md border border-sky-400 bg-sky-500/20 text-[9px] flex items-center justify-center font-bold text-sky-400">
+                  <span className="h-3 w-3 rounded-md border border-sky-500 bg-sky-50 text-[9px] flex items-center justify-center font-bold text-sky-700">
                     F
                   </span>
-                  <span className="text-slate-200">Assigned Resource</span>
-                  <span className="text-sky-400 text-[10px] ml-auto">En Route</span>
+                  <span className="text-slate-800 font-medium">Assigned Resource</span>
+                  <span className="text-sky-700 text-[10px] font-bold ml-auto">En Route</span>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-md border border-purple-400 bg-purple-500/20 text-[9px] flex items-center justify-center font-bold text-purple-400">
+                  <span className="h-3 w-3 rounded-md border border-purple-500 bg-purple-50 text-[9px] flex items-center justify-center font-bold text-purple-700">
                     M
                   </span>
-                  <span className="text-slate-200">Unavailable / Maintenance</span>
+                  <span className="text-slate-800 font-medium">Unavailable / Maintenance</span>
                 </div>
 
-                <div className="flex items-center gap-2 pt-1 border-t border-edge/50">
-                  <div className="w-6 border-b-2 border-dashed border-sky-400" />
-                  <span className="text-slate-400 text-[10px]">
+                <div className="flex items-center gap-2 pt-1 border-t border-slate-200">
+                  <div className="w-6 border-b-2 border-dashed border-sky-500" />
+                  <span className="text-slate-600 text-[10px] font-medium">
                     Active Dispatch Route Vector
                   </span>
                 </div>
@@ -722,20 +722,20 @@ export default function LiveMapPage() {
         <div className="lg:col-span-4 xl:col-span-4 space-y-3">
           {selectedEntity?.type === 'incident' ? (
             /* INCIDENT DETAIL PANEL */
-            <div className="panel p-4 space-y-4 slide-in">
+            <div className="panel p-4 space-y-4 slide-in border-slate-200 bg-white">
               {/* Header */}
-              <div className="flex items-center justify-between border-b border-edge pb-3">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div className="flex items-center gap-2.5">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-edge/80 text-xl border border-edge-2">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-xl border border-slate-200">
                     {INCIDENT_ICON[selectedEntity.data.type] || '⚠'}
                   </span>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="mono text-base font-bold text-white">
+                      <span className="mono text-base font-bold text-slate-900">
                         {selectedEntity.data.id}
                       </span>
                       <span
-                        className="badge text-[10px]"
+                        className="badge text-[10px] font-bold"
                         style={{
                           color: SEVERITY[selectedEntity.data.severity]?.color,
                           borderColor: `${SEVERITY[selectedEntity.data.severity]?.color}40`,
@@ -745,13 +745,13 @@ export default function LiveMapPage() {
                         {SEVERITY[selectedEntity.data.severity]?.label}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-400 capitalize">
+                    <p className="text-xs text-slate-500 capitalize font-medium">
                       {pretty(selectedEntity.data.type)}
                     </p>
                   </div>
                 </div>
 
-                <span className="mono text-xs font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">
+                <span className="mono text-xs font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
                   Urgency {selectedEntity.data.urgency}/10
                 </span>
               </div>
@@ -761,20 +761,20 @@ export default function LiveMapPage() {
                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-1">
                   Situation Assessment
                 </span>
-                <p className="text-xs text-slate-200 leading-relaxed bg-panel2/40 p-2.5 rounded-lg border border-edge/60">
+                <p className="text-xs text-slate-800 leading-relaxed bg-slate-50 p-2.5 rounded-lg border border-slate-200 font-medium">
                   {selectedEntity.data.description}
                 </p>
               </div>
 
               {/* Location & Reported */}
-              <div className="space-y-1.5 text-xs text-slate-300 bg-panel2/50 rounded-lg p-3 border border-edge">
+              <div className="space-y-1.5 text-xs text-slate-700 bg-slate-50 rounded-lg p-3 border border-slate-200">
                 <div className="flex items-center gap-2">
                   <span>📍</span>
-                  <span className="font-semibold text-slate-200">
+                  <span className="font-bold text-slate-900">
                     {selectedEntity.data.location_name}
                   </span>
                 </div>
-                <div className="flex items-center justify-between mono text-[11px] text-slate-400 pt-1">
+                <div className="flex items-center justify-between mono text-[11px] text-slate-500 pt-1">
                   <span>
                     Lat: {selectedEntity.data.latitude?.toFixed(4)}, Lng:{' '}
                     {selectedEntity.data.longitude?.toFixed(4)}
@@ -790,7 +790,7 @@ export default function LiveMapPage() {
                     Dispatched Fleet Units (
                     {selectedEntity.data.assigned_resources?.length || 0})
                   </span>
-                  <span className="mono text-[10px] text-sky-400">Active Links</span>
+                  <span className="mono text-[10px] text-sky-700 font-bold">Active Links</span>
                 </div>
 
                 {selectedEntity.data.assigned_resources &&
@@ -802,16 +802,16 @@ export default function LiveMapPage() {
                         <button
                           key={rid}
                           onClick={() => resObj && handleSelectResource(resObj)}
-                          className="flex items-center gap-2 rounded-lg border border-sky-500/30 bg-sky-500/10 p-2 text-left hover:bg-sky-500/20 transition-all group"
+                          className="flex items-center gap-2 rounded-lg border border-sky-200 bg-sky-50 p-2 text-left hover:bg-sky-100 transition-all group shadow-xs"
                         >
                           <span className="text-base">
                             {resObj ? RESOURCE_ICON[resObj.type] : '🚚'}
                           </span>
                           <div className="min-w-0">
-                            <span className="mono text-xs font-bold text-white group-hover:text-sky-300">
+                            <span className="mono text-xs font-bold text-slate-900 group-hover:text-sky-800">
                               {rid}
                             </span>
-                            <p className="text-[10px] text-slate-400 truncate">
+                            <p className="text-[10px] text-slate-500 truncate">
                               {resObj ? resObj.callsign : 'Deployed Unit'}
                             </p>
                           </div>
@@ -820,7 +820,7 @@ export default function LiveMapPage() {
                     })}
                   </div>
                 ) : (
-                  <div className="rounded-lg border border-dashed border-edge p-3 text-center text-xs text-slate-500">
+                  <div className="rounded-lg border border-dashed border-slate-200 p-3 text-center text-xs text-slate-500">
                     No resources currently assigned to this incident.
                   </div>
                 )}
@@ -837,20 +837,11 @@ export default function LiveMapPage() {
                     return (
                       <span
                         key={r}
-                        className="badge text-[10px]"
-                        style={
+                        className={`badge text-[10px] font-bold ${
                           isMissing
-                            ? {
-                                color: '#fca5a5',
-                                borderColor: 'rgba(239,68,68,0.4)',
-                                background: 'rgba(239,68,68,0.1)',
-                              }
-                            : {
-                                color: '#86efac',
-                                borderColor: 'rgba(34,197,94,0.35)',
-                                background: 'rgba(34,197,94,0.08)',
-                              }
-                        }
+                            ? 'text-red-700 border-red-200 bg-red-50'
+                            : 'text-emerald-700 border-emerald-200 bg-emerald-50'
+                        }`}
                       >
                         {isMissing ? '✕ Missing: ' : '✓ Assigned: '}
                         {prettyCap(r)}
@@ -861,35 +852,35 @@ export default function LiveMapPage() {
               </div>
 
               {/* Action buttons */}
-              <div className="pt-2 border-t border-edge flex items-center justify-between">
+              <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
                 <button
                   onClick={handleCenter}
-                  className="btn btn-sim text-xs flex items-center gap-1.5"
+                  className="btn text-xs flex items-center gap-1.5"
                 >
                   <span>⌖</span>
                   <span>Center Marker</span>
                 </button>
-                <span className="text-[10px] mono text-slate-500">
+                <span className="text-[10px] mono text-slate-500 font-semibold">
                   Status: {selectedEntity.data.status}
                 </span>
               </div>
             </div>
           ) : selectedEntity?.type === 'resource' ? (
             /* RESOURCE DETAIL PANEL */
-            <div className="panel p-4 space-y-4 slide-in">
+            <div className="panel p-4 space-y-4 slide-in border-slate-200 bg-white">
               {/* Header */}
-              <div className="flex items-center justify-between border-b border-edge pb-3">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <div className="flex items-center gap-2.5">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-edge/80 text-xl border border-edge-2">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-xl border border-slate-200">
                     {RESOURCE_ICON[selectedEntity.data.type] || '🚚'}
                   </span>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="mono text-base font-bold text-white">
+                      <span className="mono text-base font-bold text-slate-900">
                         {selectedEntity.data.id}
                       </span>
                       <span
-                        className="badge text-[10px]"
+                        className="badge text-[10px] font-bold"
                         style={{
                           color: RESOURCE_STATUS[selectedEntity.data.status]?.color,
                           borderColor: `${RESOURCE_STATUS[selectedEntity.data.status]?.color}40`,
@@ -899,32 +890,32 @@ export default function LiveMapPage() {
                         {RESOURCE_STATUS[selectedEntity.data.status]?.label}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-400 capitalize">
+                    <p className="text-xs text-slate-500 capitalize font-medium">
                       {RESOURCE_TYPE_LABELS[selectedEntity.data.type] ||
                         selectedEntity.data.type}
                     </p>
                   </div>
                 </div>
 
-                <span className="mono text-xs font-semibold text-slate-400">
+                <span className="mono text-xs font-semibold text-slate-500">
                   {selectedEntity.data.callsign}
                 </span>
               </div>
 
               {/* Assignment Notice */}
               {selectedEntity.data.current_assignment ? (
-                <div className="rounded-lg border border-sky-500/30 bg-sky-500/10 p-3 space-y-1">
+                <div className="rounded-lg border border-sky-200 bg-sky-50 p-3 space-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-sky-400">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-sky-800">
                       Dispatched to Incident
                     </span>
-                    <span className="mono text-xs font-bold text-white">
+                    <span className="mono text-xs font-bold text-slate-900">
                       {selectedEntity.data.current_assignment}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-300">
+                  <p className="text-xs text-slate-700">
                     En route to emergency sector. Estimated travel time:{' '}
-                    <strong className="text-white mono">
+                    <strong className="text-slate-900 mono">
                       {selectedEntity.data.eta ?? '—'} mins
                     </strong>
                   </p>
@@ -936,7 +927,7 @@ export default function LiveMapPage() {
                     return linkedInc ? (
                       <button
                         onClick={() => handleSelectIncident(linkedInc)}
-                        className="btn text-[11px] py-1 px-2.5 mt-1.5 w-full hover:text-white"
+                        className="btn text-[11px] py-1 px-2.5 mt-1.5 w-full hover:text-slate-900"
                       >
                         Inspect Incident {linkedInc.id} →
                       </button>
@@ -944,25 +935,25 @@ export default function LiveMapPage() {
                   })()}
                 </div>
               ) : (
-                <div className="rounded-lg border border-edge bg-panel2/50 p-3 text-xs text-slate-400 flex items-center gap-2">
-                  <span className="text-emerald-400">✓</span>
+                <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-xs text-slate-600 flex items-center gap-2 font-medium">
+                  <span className="text-emerald-600 font-bold">✓</span>
                   <span>Unit is currently on Standby and available for dispatch.</span>
                 </div>
               )}
 
               {/* Location & Base */}
-              <div className="space-y-1.5 text-xs text-slate-300 bg-panel2/50 rounded-lg p-3 border border-edge">
+              <div className="space-y-1.5 text-xs text-slate-700 bg-slate-50 rounded-lg p-3 border border-slate-200">
                 <div>
-                  <span className="text-[10px] uppercase font-semibold text-slate-500 block">
+                  <span className="text-[10px] uppercase font-bold text-slate-500 block">
                     Current Position
                   </span>
-                  <p className="font-semibold text-slate-200">
+                  <p className="font-bold text-slate-900">
                     📍 {selectedEntity.data.location_name}
                   </p>
                 </div>
-                <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1 border-t border-edge/50">
+                <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1 border-t border-slate-200">
                   <span>Base: {selectedEntity.data.base_station || 'Central Depot'}</span>
-                  <span className="mono">
+                  <span className="mono font-semibold">
                     {selectedEntity.data.latitude?.toFixed(4)},{' '}
                     {selectedEntity.data.longitude?.toFixed(4)}
                   </span>
@@ -974,16 +965,16 @@ export default function LiveMapPage() {
                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-1.5">
                   Unit Profile & Crew
                 </span>
-                <div className="rounded-lg bg-panel2/40 border border-edge p-2.5 text-xs space-y-1.5">
+                <div className="rounded-lg bg-slate-50 border border-slate-200 p-2.5 text-xs space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-400">Crew Size:</span>
-                    <span className="mono font-bold text-white">
+                    <span className="text-slate-600">Crew Size:</span>
+                    <span className="mono font-bold text-slate-900">
                       {selectedEntity.data.crew_size} personnel
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-400">Lead Commander:</span>
-                    <span className="text-slate-200 font-medium">
+                    <span className="text-slate-600">Lead Commander:</span>
+                    <span className="text-slate-900 font-semibold">
                       {selectedEntity.data.commander || 'Unit Supervisor'}
                     </span>
                   </div>
@@ -1000,7 +991,7 @@ export default function LiveMapPage() {
                     {selectedEntity.data.capabilities.map((cap, i) => (
                       <span
                         key={i}
-                        className="badge text-[10px] border-edge bg-panel2 text-slate-300"
+                        className="badge text-[10px] border-slate-200 bg-slate-100 text-slate-700 font-medium"
                       >
                         ⚡ {cap}
                       </span>
@@ -1010,29 +1001,29 @@ export default function LiveMapPage() {
               )}
 
               {/* Action buttons */}
-              <div className="pt-2 border-t border-edge flex items-center justify-between">
+              <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
                 <button
                   onClick={handleCenter}
-                  className="btn btn-sim text-xs flex items-center gap-1.5"
+                  className="btn text-xs flex items-center gap-1.5"
                 >
                   <span>⌖</span>
                   <span>Center Unit</span>
                 </button>
-                <span className="text-[10px] mono text-slate-500">
+                <span className="text-[10px] mono text-slate-500 font-semibold">
                   Readiness: {selectedEntity.data.availability}
                 </span>
               </div>
             </div>
           ) : (
             /* DEFAULT / EMPTY SELECTION OVERVIEW */
-            <div className="panel p-6 text-center space-y-3">
+            <div className="panel p-6 text-center space-y-3 border-slate-200 bg-white">
               <div className="text-3xl">🗺</div>
-              <h4 className="text-sm font-bold text-slate-200">Tactical Inspection</h4>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <h4 className="text-sm font-bold text-slate-800">Tactical Inspection</h4>
+              <p className="text-xs text-slate-500 leading-relaxed">
                 Click any incident icon or fleet marker on the map to inspect live telemetry,
                 coordinates, and assigned resources.
               </p>
-              <div className="pt-2 border-t border-edge text-left space-y-1.5">
+              <div className="pt-2 border-t border-slate-200 text-left space-y-1.5">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
                   Active Hotspots:
                 </span>
@@ -1040,13 +1031,13 @@ export default function LiveMapPage() {
                   <button
                     key={inc.id}
                     onClick={() => handleSelectIncident(inc)}
-                    className="w-full flex items-center justify-between p-2 rounded-lg bg-panel2/60 border border-edge hover:border-sky-500/40 text-xs text-left"
+                    className="w-full flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 text-xs text-left transition-all"
                   >
-                    <span className="mono font-bold text-white">{inc.id}</span>
-                    <span className="text-slate-400 truncate max-w-[160px]">
+                    <span className="mono font-bold text-slate-900">{inc.id}</span>
+                    <span className="text-slate-600 truncate max-w-[160px] font-medium">
                       {inc.location_name}
                     </span>
-                    <span className="text-sky-400">→</span>
+                    <span className="text-sky-700 font-bold">→</span>
                   </button>
                 ))}
               </div>

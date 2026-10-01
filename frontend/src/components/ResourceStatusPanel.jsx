@@ -18,12 +18,12 @@ export default function ResourceStatusPanel({ resources: propResources }) {
       <div className="panel-title">
         <span className="text-blue-400">🚑</span>
         <span>Resource Status</span>
-        <span className="mono rounded-full bg-edge px-2 py-0.5 text-[10px] text-slate-400">
+        <span className="mono rounded-full bg-slate-100 border border-slate-200 px-2 py-0.5 text-[10px] text-slate-500">
           {resourceList.length} total
         </span>
       </div>
 
-      <div className="divide-y divide-edge/50">
+      <div className="divide-y divide-slate-100">
         {FLEET_TYPES.map(ft => {
           const units     = byType(ft.type)
           const available = units.filter(u => u.status === 'available').length
@@ -38,19 +38,19 @@ export default function ResourceStatusPanel({ resources: propResources }) {
               <div className="flex items-center justify-between mb-2.5">
                 <div className="flex items-center gap-2">
                   <span className="text-base">{ft.icon}</span>
-                  <span className="text-sm font-semibold text-slate-300">{ft.label}</span>
-                  <span className="mono text-[10px] text-slate-600">{units.length} units</span>
+                  <span className="text-sm font-semibold text-slate-700">{ft.label}</span>
+                  <span className="mono text-[10px] text-slate-400">{units.length} units</span>
                 </div>
                 <div className="flex items-center gap-2 text-[11px]">
-                  <span className="text-green-400 font-semibold">{available} free</span>
-                  <span className="text-slate-600">/</span>
-                  <span className="text-blue-400">{assigned} on call</span>
-                  {offline > 0 && <><span className="text-slate-600">/</span><span className="text-red-400">{offline} down</span></>}
+                  <span className="text-green-600 font-semibold">{available} free</span>
+                  <span className="text-slate-300">/</span>
+                  <span className="text-blue-600">{assigned} on call</span>
+                  {offline > 0 && <><span className="text-slate-300">/</span><span className="text-red-500">{offline} down</span></>}
                 </div>
               </div>
 
               {/* Stacked bar */}
-              <div className="h-1.5 w-full overflow-hidden rounded-full bg-edge mb-3">
+              <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200 mb-3">
                 <div className="flex h-full">
                   <div className="h-full bg-green-500 transition-all" style={{ width: `${pctAvail}%` }} />
                   <div className="h-full bg-blue-500 transition-all"  style={{ width: `${pctAssign}%` }} />
@@ -82,13 +82,13 @@ export default function ResourceStatusPanel({ resources: propResources }) {
                         {RESOURCE_GLYPH[r.type]}
                       </div>
                       <div className="min-w-0">
-                        <p className="mono font-bold text-slate-200 text-[11px]">{r.id}</p>
+                        <p className="mono font-bold text-slate-700 text-[11px]">{r.id}</p>
                         <p className="text-[10px]" style={{ color: st.color }}>{st.label}</p>
                         {r.current_assignment && (
-                          <p className="mono text-[10px] text-sky-400">{r.current_assignment}</p>
+                          <p className="mono text-[10px] text-sky-600">{r.current_assignment}</p>
                         )}
                       </div>
-                      {isDown && <span className="ml-auto text-red-400 text-[10px]">✗</span>}
+                      {isDown && <span className="ml-auto text-red-500 text-[10px]">✗</span>}
                     </div>
                   )
                 })}

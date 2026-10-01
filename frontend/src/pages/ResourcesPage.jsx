@@ -155,46 +155,46 @@ export default function ResourcesPage() {
         <div className="stat-card" style={{ '--accent-color': '#0ea5e9' }}>
           <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Total Resources</span>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold mono text-white">{stats.total}</span>
-            <span className="text-[11px] text-slate-500">fleet units</span>
+            <span className="text-2xl font-bold mono text-slate-900">{stats.total}</span>
+            <span className="text-[11px] text-slate-500 font-medium">fleet units</span>
           </div>
         </div>
 
         <div className="stat-card" style={{ '--accent-color': '#22c55e' }}>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400">Available</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600">Available</span>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold mono text-emerald-400">{stats.available}</span>
-            <span className="text-[11px] text-emerald-500/80">ready</span>
+            <span className="text-2xl font-bold mono text-emerald-700">{stats.available}</span>
+            <span className="text-[11px] text-emerald-600 font-medium">ready</span>
           </div>
         </div>
 
         <div className="stat-card" style={{ '--accent-color': '#3b82f6' }}>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-sky-400">Assigned</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-sky-600">Assigned</span>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold mono text-sky-400">{stats.assigned}</span>
-            <span className="text-[11px] text-sky-500/80">deployed</span>
+            <span className="text-2xl font-bold mono text-sky-700">{stats.assigned}</span>
+            <span className="text-[11px] text-sky-600 font-medium">deployed</span>
           </div>
         </div>
 
         <div className="stat-card" style={{ '--accent-color': '#ef4444' }}>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-red-400">Unavailable</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-red-600">Unavailable</span>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold mono text-red-400">{stats.unavailable}</span>
-            <span className="text-[11px] text-red-500/80">offline</span>
+            <span className="text-2xl font-bold mono text-red-700">{stats.unavailable}</span>
+            <span className="text-[11px] text-red-600 font-medium">offline</span>
           </div>
         </div>
 
         <div className="stat-card col-span-2 sm:col-span-1" style={{ '--accent-color': '#a855f7' }}>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-purple-400">Maintenance</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-purple-600">Maintenance</span>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold mono text-purple-400">{stats.maintenance}</span>
-            <span className="text-[11px] text-purple-400/80">service</span>
+            <span className="text-2xl font-bold mono text-purple-700">{stats.maintenance}</span>
+            <span className="text-[11px] text-purple-600 font-medium">service</span>
           </div>
         </div>
       </div>
 
       {/* ── Resource Category Tabs ── */}
-      <div className="panel p-2">
+      <div className="panel p-2 bg-white border-slate-200">
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
           {CATEGORY_TABS.map((tab) => {
             const isSelected = categoryFilter === tab.id
@@ -209,17 +209,17 @@ export default function ResourcesPage() {
                 onClick={() => setCategoryFilter(tab.id)}
                 className={`flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-semibold whitespace-nowrap transition-all ${
                   isSelected
-                    ? 'bg-sky-500/15 text-sky-300 border border-sky-500/35 shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-panel2/60 border border-transparent'
+                    ? 'bg-sky-100 text-sky-800 border border-sky-300 shadow-2xs font-bold'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 border border-transparent'
                 }`}
               >
                 <span className="text-sm">{tab.icon}</span>
                 <span>{tab.label}</span>
                 <span
-                  className={`mono text-[10px] px-1.5 py-0.2 rounded-full ${
+                  className={`mono text-[10px] px-2 py-0.5 rounded-full font-bold ${
                     isSelected
-                      ? 'bg-sky-500/25 text-sky-200'
-                      : 'bg-edge text-slate-500'
+                      ? 'bg-sky-200 text-sky-800'
+                      : 'bg-slate-100 text-slate-600'
                   }`}
                 >
                   {count}
@@ -231,12 +231,12 @@ export default function ResourcesPage() {
       </div>
 
       {/* ── Toolbar: Search, Filters, and Layout Mode ── */}
-      <div className="panel p-4 space-y-3">
+      <div className="panel p-4 space-y-3 bg-white border-slate-200">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
           
           {/* Search Box */}
           <div className="relative flex-1 min-w-[240px]">
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm">
+            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm">
               🔍
             </span>
             <input
@@ -244,12 +244,12 @@ export default function ResourcesPage() {
               placeholder="Search by ID, callsign, type, location or assigned incident..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="input pl-10 pr-9 text-xs"
+              className="input pl-10 pr-9 text-xs bg-white"
             />
             {search && (
               <button
                 onClick={() => setSearch('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 text-xs"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 text-xs"
                 title="Clear search"
               >
                 ✕
@@ -260,13 +260,13 @@ export default function ResourcesPage() {
           {/* Action buttons */}
           <div className="flex items-center gap-2 self-end lg:self-auto">
             {/* View Mode Switcher */}
-            <div className="flex items-center rounded-lg border border-edge bg-panel2 p-0.5">
+            <div className="flex items-center rounded-lg border border-slate-200 bg-slate-50 p-0.5">
               <button
                 onClick={() => setViewMode('table')}
                 className={`rounded-md px-2.5 py-1 text-xs font-semibold transition-all ${
                   viewMode === 'table'
-                    ? 'bg-sky-500/20 text-sky-300 border border-sky-500/30'
-                    : 'text-slate-500 hover:text-slate-300'
+                    ? 'bg-sky-100 text-sky-700 border border-sky-300'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
                 title="Table View"
               >
@@ -276,8 +276,8 @@ export default function ResourcesPage() {
                 onClick={() => setViewMode('cards')}
                 className={`rounded-md px-2.5 py-1 text-xs font-semibold transition-all ${
                   viewMode === 'cards'
-                    ? 'bg-sky-500/20 text-sky-300 border border-sky-500/30'
-                    : 'text-slate-500 hover:text-slate-300'
+                    ? 'bg-sky-100 text-sky-700 border border-sky-300'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
                 title="Cards View"
               >
@@ -289,7 +289,7 @@ export default function ResourcesPage() {
             <button
               onClick={handleRefresh}
               disabled={loading}
-              className="btn text-xs"
+              className="btn bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-medium"
               title="Refresh telemetry"
             >
               <span className={loading ? 'animate-spin' : ''}>🔄</span>
@@ -299,7 +299,7 @@ export default function ResourcesPage() {
         </div>
 
         {/* Filter Chips Bar */}
-        <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-edge text-xs">
+        <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-slate-200 text-xs">
           
           {/* Status Filter buttons */}
           <div className="flex items-center gap-1.5 flex-wrap">
@@ -313,14 +313,14 @@ export default function ResourcesPage() {
                   onClick={() => setStatusFilter(st)}
                   className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold capitalize transition-all ${
                     active
-                      ? 'border shadow-sm'
-                      : 'border border-edge bg-panel2/40 text-slate-500 hover:text-slate-300'
+                      ? 'border shadow-2xs font-bold'
+                      : 'border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                   }`}
                   style={
                     active
                       ? stConf
                         ? { color: stConf.color, borderColor: `${stConf.color}60`, background: `${stConf.color}18` }
-                        : { color: '#38bdf8', borderColor: '#38bdf860', background: 'rgba(56,189,248,0.15)' }
+                        : { color: '#0284c7', borderColor: '#0284c7', background: 'rgba(2,132,199,0.1)' }
                       : {}
                   }
                 >
@@ -330,7 +330,7 @@ export default function ResourcesPage() {
             })}
           </div>
 
-          <div className="hidden md:block h-4 w-px bg-edge" />
+          <div className="hidden md:block h-4 w-px bg-slate-200" />
 
           {/* Availability filter */}
           <div className="flex items-center gap-1.5 flex-wrap">
@@ -346,8 +346,8 @@ export default function ResourcesPage() {
                 onClick={() => setAvailabilityFilter(f.id)}
                 className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold transition-all ${
                   availabilityFilter === f.id
-                    ? 'bg-sky-500/20 text-sky-300 border border-sky-500/40'
-                    : 'border border-edge bg-panel2/40 text-slate-500 hover:text-slate-300'
+                    ? 'bg-sky-100 text-sky-700 border border-sky-300 font-bold'
+                    : 'border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                 }`}
               >
                 {f.label}
@@ -358,7 +358,7 @@ export default function ResourcesPage() {
           {hasActiveFilters && (
             <button
               onClick={clearAllFilters}
-              className="text-[11px] text-red-400 hover:text-red-300 underline underline-offset-2 ml-auto"
+              className="text-[11px] text-red-600 hover:text-red-800 font-semibold underline underline-offset-2 ml-auto"
             >
               Reset filters
             </button>
@@ -370,9 +370,9 @@ export default function ResourcesPage() {
       {loading ? (
         <LoadingSkeleton viewMode={viewMode} />
       ) : filteredResources.length === 0 ? (
-        <div className="panel p-12 text-center space-y-3">
+        <div className="panel p-12 text-center space-y-3 bg-white border-slate-200">
           <div className="text-4xl">🚚</div>
-          <h3 className="text-sm font-bold text-slate-300">No Fleet Units Found</h3>
+          <h3 className="text-sm font-bold text-slate-800">No Fleet Units Found</h3>
           <p className="text-xs text-slate-500 max-w-sm mx-auto">
             No resources match the specified search term or selected filter combinations.
           </p>
@@ -384,7 +384,7 @@ export default function ResourcesPage() {
         </div>
       ) : viewMode === 'table' ? (
         /* ── TABLE VIEW ── */
-        <div className="panel overflow-x-auto">
+        <div className="panel overflow-x-auto bg-white border-slate-200">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr>
@@ -398,13 +398,13 @@ export default function ResourcesPage() {
                 <th className="text-right pr-4">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-edge/50">
+            <tbody className="divide-y divide-slate-100">
               {filteredResources.map((res) => {
                 const icon = RESOURCE_ICON[res.type] || '🚚'
                 const typeLabel = RESOURCE_TYPE_LABELS[res.type] || prettyCap(res.type)
                 const st = RESOURCE_STATUS[res.status] || {
                   label: prettyCap(res.status),
-                  color: '#94a3b8',
+                  color: '#64748b',
                 }
                 const isSelected = selectedResource?.id === res.id
 
@@ -414,14 +414,14 @@ export default function ResourcesPage() {
                     onClick={() => setSelectedResource(res)}
                     className={`cursor-pointer transition-colors ${
                       isSelected
-                        ? 'bg-sky-500/10'
+                        ? 'bg-sky-50/80'
                         : res.status === 'unavailable'
-                        ? 'hover:bg-red-500/5 bg-red-500/2'
-                        : 'hover:bg-panel2/60'
+                        ? 'hover:bg-red-50/50 bg-red-50/30'
+                        : 'hover:bg-slate-50'
                     }`}
                   >
                     {/* ID */}
-                    <td className="mono font-bold text-xs text-white">
+                    <td className="mono font-bold text-xs text-slate-900">
                       <div className="flex items-center gap-2">
                         <span
                           className="h-2 w-2 rounded-full flex-shrink-0"
@@ -439,7 +439,7 @@ export default function ResourcesPage() {
                       <div className="flex items-center gap-2">
                         <span className="text-sm">{icon}</span>
                         <div>
-                          <p className="text-xs font-semibold text-slate-200">{typeLabel}</p>
+                          <p className="text-xs font-semibold text-slate-800">{typeLabel}</p>
                           <p className="mono text-[10px] text-slate-500">{res.callsign || 'UNIT'}</p>
                         </div>
                       </div>
@@ -448,7 +448,7 @@ export default function ResourcesPage() {
                     {/* Location */}
                     <td>
                       <div className="max-w-xs">
-                        <p className="text-xs text-slate-200 truncate flex items-center gap-1">
+                        <p className="text-xs font-medium text-slate-800 truncate flex items-center gap-1">
                           <span>📍</span>
                           <span>{res.location_name}</span>
                         </p>
@@ -461,7 +461,7 @@ export default function ResourcesPage() {
                     {/* Status Badge */}
                     <td>
                       <span
-                        className="badge text-[10px]"
+                        className="badge text-[10px] font-semibold"
                         style={{
                           color: st.color,
                           borderColor: `${st.color}45`,
@@ -475,26 +475,26 @@ export default function ResourcesPage() {
                     {/* Assigned Incident */}
                     <td>
                       {res.current_assignment ? (
-                        <span className="inline-flex items-center gap-1.5 rounded-lg border border-sky-500/35 bg-sky-500/15 px-2.5 py-0.5 text-xs font-bold text-sky-200 mono">
-                          <span className="h-1.5 w-1.5 rounded-full bg-sky-400 animate-pulse" />
+                        <span className="inline-flex items-center gap-1.5 rounded-lg border border-sky-300 bg-sky-50 px-2.5 py-0.5 text-xs font-bold text-sky-800 mono">
+                          <span className="h-1.5 w-1.5 rounded-full bg-sky-600 animate-pulse" />
                           {res.current_assignment}
                         </span>
                       ) : (
-                        <span className="text-xs text-slate-500 italic">None (Standby)</span>
+                        <span className="text-xs text-slate-400 italic">None (Standby)</span>
                       )}
                     </td>
 
                     {/* Availability */}
                     <td>
-                      <div className="text-xs text-slate-300 font-medium">{res.availability}</div>
+                      <div className="text-xs text-slate-700 font-medium">{res.availability}</div>
                       {res.eta && (
-                        <span className="mono text-[10px] text-sky-400">ETA: {res.eta} mins</span>
+                        <span className="mono text-[10px] text-sky-700 font-semibold">ETA: {res.eta} mins</span>
                       )}
                     </td>
 
                     {/* Last Updated */}
                     <td>
-                      <div className="text-xs text-slate-300">{timeSince(res.last_updated)}</div>
+                      <div className="text-xs font-medium text-slate-700">{timeSince(res.last_updated)}</div>
                       <div className="mono text-[10px] text-slate-500">{fmtTime(res.last_updated)}</div>
                     </td>
 
@@ -505,7 +505,7 @@ export default function ResourcesPage() {
                           e.stopPropagation()
                           setSelectedResource(res)
                         }}
-                        className="btn text-[11px] py-1 px-2.5 hover:text-white"
+                        className="btn bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-[11px] py-1 px-2.5 font-medium shadow-2xs"
                       >
                         View Details →
                       </button>
@@ -524,7 +524,7 @@ export default function ResourcesPage() {
             const typeLabel = RESOURCE_TYPE_LABELS[res.type] || prettyCap(res.type)
             const st = RESOURCE_STATUS[res.status] || {
               label: prettyCap(res.status),
-              color: '#94a3b8',
+              color: '#64748b',
             }
             const isSelected = selectedResource?.id === res.id
 
@@ -532,32 +532,32 @@ export default function ResourcesPage() {
               <div
                 key={res.id}
                 onClick={() => setSelectedResource(res)}
-                className={`panel p-4 cursor-pointer transition-all flex flex-col justify-between ${
+                className={`panel p-4 cursor-pointer transition-all flex flex-col justify-between bg-white border-slate-200 shadow-2xs ${
                   isSelected
-                    ? 'border-sky-500/60 ring-1 ring-sky-500/30'
-                    : 'hover:border-edge-2'
+                    ? 'border-sky-400 ring-2 ring-sky-200'
+                    : 'hover:border-slate-300 hover:shadow-xs'
                 }`}
               >
                 <div>
                   {/* Card Header */}
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-2.5">
-                      <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-edge/70 text-lg border border-edge-2">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-lg border border-slate-200">
                         {icon}
                       </span>
                       <div>
                         <div className="flex items-center gap-1.5">
-                          <span className="mono text-xs font-bold text-white">{res.id}</span>
-                          <span className="text-[10px] font-semibold text-slate-400 mono">
+                          <span className="mono text-xs font-bold text-slate-900">{res.id}</span>
+                          <span className="text-[10px] font-semibold text-slate-500 mono">
                             [{res.callsign || 'UNIT'}]
                           </span>
                         </div>
-                        <p className="text-[11px] text-slate-400 capitalize">{typeLabel}</p>
+                        <p className="text-[11px] text-slate-500 capitalize font-medium">{typeLabel}</p>
                       </div>
                     </div>
 
                     <span
-                      className="badge text-[10px]"
+                      className="badge text-[10px] font-semibold"
                       style={{
                         color: st.color,
                         borderColor: `${st.color}45`,
@@ -569,12 +569,12 @@ export default function ResourcesPage() {
                   </div>
 
                   {/* Location & Status Info */}
-                  <div className="space-y-1.5 text-xs text-slate-400 mb-3 bg-panel2/50 rounded-lg p-2.5 border border-edge/60">
-                    <div className="flex items-center gap-1.5 truncate">
+                  <div className="space-y-1.5 text-xs text-slate-600 mb-3 bg-slate-50 rounded-lg p-2.5 border border-slate-200">
+                    <div className="flex items-center gap-1.5 truncate font-medium">
                       <span>📍</span>
-                      <span className="truncate text-slate-200">{res.location_name}</span>
+                      <span className="truncate text-slate-800">{res.location_name}</span>
                     </div>
-                    <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1 border-t border-edge/40">
+                    <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1 border-t border-slate-200">
                       <span>Base: {res.base_station || 'Main Base'}</span>
                       <span className="mono text-slate-500">Updated {timeSince(res.last_updated)}</span>
                     </div>
@@ -582,23 +582,23 @@ export default function ResourcesPage() {
 
                   {/* Assignment and Availability */}
                   <div className="grid grid-cols-2 gap-2 text-xs mb-3">
-                    <div className="rounded-lg bg-panel2/40 border border-edge p-2">
-                      <span className="text-[10px] uppercase font-semibold text-slate-500 block">
+                    <div className="rounded-lg bg-slate-50 border border-slate-200 p-2">
+                      <span className="text-[10px] uppercase font-bold text-slate-500 block">
                         Assignment
                       </span>
                       {res.current_assignment ? (
-                        <span className="mono font-bold text-sky-300 text-xs">
+                        <span className="mono font-bold text-sky-700 text-xs">
                           🚨 {res.current_assignment}
                         </span>
                       ) : (
-                        <span className="text-slate-500 italic text-[11px]">Standby</span>
+                        <span className="text-slate-400 italic text-[11px]">Standby</span>
                       )}
                     </div>
-                    <div className="rounded-lg bg-panel2/40 border border-edge p-2">
-                      <span className="text-[10px] uppercase font-semibold text-slate-500 block">
+                    <div className="rounded-lg bg-slate-50 border border-slate-200 p-2">
+                      <span className="text-[10px] uppercase font-bold text-slate-500 block">
                         Readiness
                       </span>
-                      <span className="font-semibold text-slate-200 text-[11px] truncate block">
+                      <span className="font-semibold text-slate-800 text-[11px] truncate block">
                         {res.availability}
                       </span>
                     </div>
@@ -608,12 +608,12 @@ export default function ResourcesPage() {
                   {res.capabilities && res.capabilities.length > 0 && (
                     <div className="flex flex-wrap gap-1 mb-2">
                       {res.capabilities.slice(0, 2).map((cap, i) => (
-                        <span key={i} className="badge text-[9px] border-edge bg-panel2 text-slate-400">
+                        <span key={i} className="badge text-[9px] border border-slate-200 bg-slate-50 text-slate-600 font-medium">
                           {cap}
                         </span>
                       ))}
                       {res.capabilities.length > 2 && (
-                        <span className="text-[9px] text-slate-500 self-center">
+                        <span className="text-[9px] text-slate-400 self-center font-medium">
                           +{res.capabilities.length - 2} more
                         </span>
                       )}
@@ -622,16 +622,16 @@ export default function ResourcesPage() {
                 </div>
 
                 {/* Card Footer */}
-                <div className="pt-3 border-t border-edge flex items-center justify-between">
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
                   <span className="text-[11px] text-slate-500">
-                    Crew: <strong className="text-slate-300 mono">{res.crew_size}</strong>
+                    Crew: <strong className="text-slate-800 mono">{res.crew_size}</strong>
                   </span>
                   <button
                     onClick={(e) => {
                       e.stopPropagation()
                       setSelectedResource(res)
                     }}
-                    className="btn text-xs py-1 px-3 hover:text-white"
+                    className="btn bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs py-1 px-3 font-medium shadow-2xs"
                   >
                     View Details →
                   </button>
@@ -653,18 +653,19 @@ export default function ResourcesPage() {
       {toast && (
         <div className="fixed bottom-6 right-6 z-50 slide-in">
           <div
-            className="toast flex items-center gap-3 bg-panel border-edge shadow-2xl"
+            className="toast flex items-center gap-3 bg-white border border-slate-200 shadow-xl rounded-xl p-3"
             style={{
-              borderLeftColor: toast.type === 'success' ? '#22c55e' : '#38bdf8',
+              borderLeftWidth: '4px',
+              borderLeftColor: toast.type === 'success' ? '#16a34a' : '#0284c7',
             }}
           >
             <span className="text-base">
               {toast.type === 'success' ? '✅' : 'ℹ️'}
             </span>
-            <span className="text-xs text-slate-200">{toast.message}</span>
+            <span className="text-xs font-semibold text-slate-800">{toast.message}</span>
             <button
               onClick={() => setToast(null)}
-              className="text-slate-500 hover:text-white text-xs ml-2"
+              className="text-slate-400 hover:text-slate-700 text-xs ml-2 font-bold"
             >
               ✕
             </button>

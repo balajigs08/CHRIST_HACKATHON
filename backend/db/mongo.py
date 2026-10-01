@@ -85,19 +85,39 @@ class MongoPersistence:
 
     # ------------------------------------------------------------ lifecycle
     def connect(self) -> None:
-        """Fail fast if MongoDB is unreachable, then make sure the indexes exist."""
-        self.client.admin.command("ping")
-        self.db["events"].create_index([("timestamp", 1)])
-        self.db["incidents"].create_index([("status", 1)])
-        self.db["approvals"].create_index([("status", 1)])
-        log.info("Connected to MongoDB database '%s'", self.db_name)
+        """Check connection to MongoDB, ping database, and ensure collection indexes exist."""
+        try:
+            self.client.admin.command("ping")
+            self.db["events"].create_index([("timestamp", 1)])
+            self.db["incidents"].create_index([("status", 1)])
+            self.db["approvals"].create_index([("status", 1)])
+            self.healthy = True
+            self.last_error = None
+            log.info("Successfully connected to MongoDB database '%s'", self.db_name)
+        except Exception as exc:
+            self.healthy = False
+            self.last_error = f"{type(exc).__name__}: {exc}"
+            log.warning("MongoDB connection ping failed: %s", exc)
+
 
     def close(self) -> None:
         self.client.close()
 
     def status(self) -> dict:
-        return {"backend": "mongodb", "database": self.db_name,
-                "status": "ok" if self.healthy else "degraded", "last_error": self.last_error}
+        try:
+            self.client.admin.command("ping")
+            self.healthy = True
+            self.last_error = None
+        except Exception as exc:
+            self.healthy = False
+            self.last_error = f"{type(exc).__name__}: {exc}"
+        return {
+            "backend": "mongodb",
+            "database": self.db_name,
+            "status": "connected" if self.healthy else "disconnected",
+            "last_error": self.last_error,
+        }
+
 
     def mark_reset(self) -> None:
         """Called after a scenario reset: the next save wipes the collections before writing."""

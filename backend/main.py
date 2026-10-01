@@ -6,7 +6,7 @@ Run locally:
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException, Request, status
+from fastapi import FastAPI, HTTPException, Request, status, WebSocket
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, RedirectResponse
@@ -15,12 +15,14 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from api.routes import router as api_router
 from config import settings
 from models.errors import CrisisError
+from services.email_service import email_service
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO if not settings.debug else logging.DEBUG,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
+logging.getLogger("pymongo").setLevel(logging.INFO)
 logger = logging.getLogger("crisis-command")
 
 
@@ -28,7 +30,35 @@ logger = logging.getLogger("crisis-command")
 async def lifespan(app: FastAPI):
     """Lifespan event handler for application startup and shutdown."""
     logger.info(f"Starting {settings.project_name} backend v{settings.version} in {settings.env} mode")
+    
+    # Safe SMTP startup diagnostics (Never printing passwords or OTPs)
+    smtp_diag = email_service.get_diagnostics()
+    logger.info(
+        "SMTP Service Diagnostics: [Configured: %s] Host: %s | Port: %s | From: %s | TLS: %s | SSL: %s",
+        smtp_diag["configured"],
+        smtp_diag["host"],
+        smtp_diag["port"],
+        smtp_diag["sender_email"],
+        smtp_diag["use_tls"],
+        smtp_diag["use_ssl"],
+    )
+
+    try:
+        from services.container import container
+        await container.startup()
+        if container.persistence and container.persistence.healthy:
+            logger.info("MongoDB persistence layer connected successfully.")
+        else:
+            logger.info("Operating with in-memory working set.")
+    except Exception as exc:
+        logger.warning(f"Note during container startup: {exc}")
     yield
+    try:
+        from services.container import container
+        await container.shutdown()
+        logger.info("Container resources released.")
+    except Exception:
+        pass
     logger.info(f"Shutting down {settings.project_name} backend")
 
 
@@ -122,6 +152,21 @@ async def root_redirect():
 
 # Include the API router with /api prefix
 app.include_router(api_router)
+
+
+@app.websocket("/ws/dashboard")
+async def ws_dashboard(websocket: WebSocket):
+    import json
+    from services.container import container
+    await container.ws.connect(websocket)
+    try:
+        await websocket.send_text(json.dumps({"type": "state_snapshot", "snapshot": container.agent.snapshot()}))
+        while True:
+            await websocket.receive_text()
+    except Exception:
+        pass
+    finally:
+        container.ws.disconnect(websocket)
 
 
 if __name__ == "__main__":

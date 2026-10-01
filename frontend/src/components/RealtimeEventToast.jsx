@@ -24,16 +24,16 @@ export default function RealtimeEventToast({ notification, onDismiss }) {
   return (
     <div className="fixed top-16 right-6 z-50 max-w-md w-full animate-slide-in">
       <div
-        className={`relative overflow-hidden rounded-2xl border p-4 shadow-2xl backdrop-blur-2xl transition-all ${
+        className={`relative overflow-hidden rounded-2xl border p-4 shadow-xl bg-white transition-all ${
           isCritical
-            ? 'border-red-500/50 bg-slate-950/95 text-red-200 shadow-red-950/40'
-            : 'border-sky-500/50 bg-slate-950/95 text-sky-200 shadow-sky-950/40'
+            ? 'border-red-300 text-slate-800'
+            : 'border-sky-300 text-slate-800'
         }`}
       >
-        {/* Top glowing edge bar */}
+        {/* Top edge accent bar */}
         <div
-          className={`absolute top-0 left-0 right-0 h-1 ${
-            isCritical ? 'bg-gradient-to-r from-red-500 via-orange-500 to-amber-500' : 'bg-gradient-to-r from-sky-500 via-blue-500 to-purple-500'
+          className={`absolute top-0 left-0 right-0 h-1.5 ${
+            isCritical ? 'bg-red-500' : 'bg-sky-500'
           }`}
         />
 
@@ -42,22 +42,24 @@ export default function RealtimeEventToast({ notification, onDismiss }) {
 
           <div className="flex-1 space-y-1">
             <div className="flex items-center justify-between gap-2">
-              <span className="badge text-[10px] font-mono font-bold bg-slate-900 border border-edge uppercase tracking-wider text-slate-300">
+              <span className={`badge text-[10px] font-mono font-bold px-2 py-0.5 rounded border uppercase tracking-wider ${
+                isCritical ? 'bg-red-50 text-red-700 border-red-200' : 'bg-sky-50 text-sky-700 border-sky-200'
+              }`}>
                 LIVE UPDATE
               </span>
-              <span className="font-mono text-[10px] text-slate-400">
+              <span className="font-mono text-[10px] text-slate-500">
                 {fmtTime(notification.time)}
               </span>
             </div>
 
-            <h4 className="text-xs font-bold text-white leading-snug">
+            <h4 className="text-xs font-bold text-slate-900 leading-snug">
               {notification.title}
             </h4>
           </div>
 
           <button
             onClick={onDismiss}
-            className="text-slate-400 hover:text-white transition-colors text-sm px-1 py-0.5"
+            className="text-slate-400 hover:text-slate-700 transition-colors text-sm px-1 py-0.5 font-bold"
             title="Dismiss notification"
           >
             ✕

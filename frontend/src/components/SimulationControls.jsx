@@ -29,10 +29,10 @@ export default function SimulationControls({ run, busy }) {
     <div className="panel">
       {/* Header */}
       <div className="panel-title">
-        <span className="text-sky-400">🎮</span>
+        <span className="text-sky-600">🎮</span>
         <span>Simulation Controls</span>
         {lastAction && (
-          <span className="ml-auto mono text-[10px] text-sky-400 normal-case animate-flash">
+          <span className="ml-auto mono text-[10px] text-sky-600 normal-case font-bold">
             ⟳ {lastAction}
           </span>
         )}
@@ -96,13 +96,13 @@ export default function SimulationControls({ run, busy }) {
           </div>
           <div className="flex items-center gap-2 mt-2">
             <button disabled={busy} onClick={() => act('Recalculating…', api.recalc)}
-              className="btn flex-1">
+              className="btn bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 flex-1">
               ⟳ Recalculate Plan
             </button>
-            <div className="flex items-center gap-1 rounded-lg border border-edge bg-panel2/50 px-2">
-              <button className="text-slate-500 hover:text-slate-300 px-1" onClick={() => setAdvMin(m => Math.max(5, m-5))}>−</button>
-              <span className="mono text-xs text-slate-300 w-10 text-center">+{advMin}m</span>
-              <button className="text-slate-500 hover:text-slate-300 px-1" onClick={() => setAdvMin(m => Math.min(60, m+5))}>+</button>
+            <div className="flex items-center gap-1 rounded-lg border border-slate-200 bg-slate-50 px-2">
+              <button className="text-slate-500 hover:text-slate-800 px-1 font-bold" onClick={() => setAdvMin(m => Math.max(5, m-5))}>−</button>
+              <span className="mono text-xs text-slate-700 font-bold w-10 text-center">+{advMin}m</span>
+              <button className="text-slate-500 hover:text-slate-800 px-1 font-bold" onClick={() => setAdvMin(m => Math.min(60, m+5))}>+</button>
             </div>
             <button disabled={busy} onClick={() => act(`Advancing +${advMin}min…`, () => api.advance(advMin))}
               className="btn btn-warn flex-1">
@@ -121,7 +121,7 @@ export default function SimulationControls({ run, busy }) {
               onChange={e => setText(e.target.value)}
               rows={3}
               placeholder={`Report an emergency in plain text…\ne.g. "Major gas explosion near City Centre, multiple casualties trapped."`}
-              className="input resize-none text-sm"
+              className="input resize-none text-sm bg-white"
             />
             <button
               disabled={busy || text.trim().length < 3}
@@ -154,7 +154,7 @@ export default function SimulationControls({ run, busy }) {
 function Section({ icon, title, children }) {
   return (
     <div>
-      <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-600 mb-2 flex items-center gap-1.5">
+      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-1.5">
         <span>{icon}</span>{title}
       </p>
       {children}

@@ -15,7 +15,7 @@ export default function Sidebar({ activeTab, onTabChange, pendingApprovals = 0, 
     <>
       {/* Desktop sidebar */}
       <aside
-        className="hidden lg:flex flex-col w-56 flex-shrink-0 border-r border-edge bg-surface/80 backdrop-blur-xl"
+        className="hidden lg:flex flex-col w-56 flex-shrink-0 border-r border-slate-200 bg-white"
         style={{ minHeight: 'calc(100vh - 57px)' }}
       >
         <nav className="flex-1 py-3 px-2 space-y-0.5">
@@ -32,26 +32,26 @@ export default function Sidebar({ activeTab, onTabChange, pendingApprovals = 0, 
                 onClick={() => onTabChange(item.id)}
                 className={`group relative w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all text-left ${
                   isActive
-                    ? 'bg-gradient-to-r from-sky-500/15 to-blue-500/10 text-sky-300 border border-sky-500/20'
-                    : 'text-slate-500 hover:text-slate-300 hover:bg-panel/60'
+                    ? 'bg-sky-50 text-sky-700 border border-sky-200'
+                    : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50 border border-transparent'
                 }`}
               >
                 {/* Active indicator bar */}
                 {isActive && (
-                  <span className="absolute left-0 top-2 bottom-2 w-0.5 rounded-full bg-sky-400" />
+                  <span className="absolute left-0 top-2 bottom-2 w-0.5 rounded-full bg-sky-500" />
                 )}
 
                 <Icon
                   className="flex-shrink-0 transition-colors"
                   size={16}
-                  color={isActive ? '#38bdf8' : 'currentColor'}
+                  color={isActive ? '#0284c7' : 'currentColor'}
                 />
                 <span>{item.label}</span>
 
                 {badge > 0 && (
                   <span
                     className={`ml-auto flex h-5 min-w-[20px] items-center justify-center rounded-full px-1.5 text-[10px] font-bold ${
-                      item.id === 'alerts' ? 'bg-red-500/20 text-red-300 animate-flash' : 'bg-orange-500/20 text-orange-300'
+                      item.id === 'alerts' ? 'bg-red-100 text-red-600 animate-flash' : 'bg-orange-100 text-orange-600'
                     }`}
                   >
                     {badge}
@@ -63,14 +63,14 @@ export default function Sidebar({ activeTab, onTabChange, pendingApprovals = 0, 
         </nav>
 
         {/* Bottom info */}
-        <div className="border-t border-edge px-4 py-3">
-          <p className="text-[10px] text-slate-700 font-mono uppercase tracking-widest">v1.0.0 · Mock</p>
-          <p className="text-[10px] text-slate-700 mt-0.5">GATEWAYS 2026</p>
+        <div className="border-t border-slate-200 px-4 py-3 bg-slate-50">
+          <p className="text-[10px] text-slate-400 font-mono uppercase tracking-widest">v1.0.0 · Mock</p>
+          <p className="text-[10px] text-slate-400 mt-0.5">GATEWAYS 2026</p>
         </div>
       </aside>
 
       {/* Mobile bottom nav */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-30 flex items-center overflow-x-auto border-t border-edge bg-surface/95 backdrop-blur-xl px-2 py-1 gap-1">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-30 flex items-center overflow-x-auto border-t border-slate-200 bg-white px-2 py-1 gap-1 shadow-lg">
         {NAV_ITEMS.map(item => {
           const Icon     = item.icon
           const isActive = activeTab === item.id
@@ -83,10 +83,10 @@ export default function Sidebar({ activeTab, onTabChange, pendingApprovals = 0, 
               key={item.id}
               onClick={() => onTabChange(item.id)}
               className={`relative flex flex-shrink-0 flex-col items-center gap-0.5 px-3 py-1.5 min-w-[62px] rounded-xl text-[10px] font-medium transition-colors ${
-                isActive ? 'text-sky-300 bg-sky-500/10' : 'text-slate-400 hover:text-slate-200'
+                isActive ? 'text-sky-600 bg-sky-50' : 'text-slate-400 hover:text-slate-700 hover:bg-slate-50'
               }`}
             >
-              <Icon size={16} color={isActive ? '#38bdf8' : 'currentColor'} />
+              <Icon size={16} color={isActive ? '#0284c7' : 'currentColor'} />
               <span className="truncate max-w-[58px]">{item.label.split(' ')[0]}</span>
               {badge > 0 && (
                 <span className="absolute top-1 right-2 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-red-500 text-[8px] font-black text-white">

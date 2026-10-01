@@ -3,12 +3,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink:    '#060d1a',
-        surface:'#0b1525',
-        panel:  '#0f1d30',
-        panel2: '#132236',
-        edge:   '#1c2e47',
-        edge2:  '#253a56',
+        // Light theme palette
+        ink:    '#ffffff',       // page background (was dark)
+        surface:'#f8fafc',       // component surface (was dark)
+        panel:  '#ffffff',       // card/panel background
+        panel2: '#f1f5f9',       // alternate panel
+        edge:   '#e2e8f0',       // borders
+        edge2:  '#cbd5e1',       // stronger borders
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -29,7 +30,7 @@ export default {
         'slide-in-right': { from: { transform: 'translateX(120%)', opacity: 0 }, to: { transform: 'translateX(0)', opacity: 1 } },
         'slide-in-up':    { from: { transform: 'translateY(20px)', opacity: 0 }, to: { transform: 'translateY(0)', opacity: 1 } },
         'pulse-ring':     { '0%': { transform: 'scale(0.8)', opacity: 0.8 }, '100%': { transform: 'scale(2.2)', opacity: 0 } },
-        'glow-pulse':     { '0%,100%': { boxShadow: '0 0 12px rgba(239,68,68,0.3)' }, '50%': { boxShadow: '0 0 28px rgba(239,68,68,0.6)' } },
+        'glow-pulse':     { '0%,100%': { boxShadow: '0 0 12px rgba(239,68,68,0.2)' }, '50%': { boxShadow: '0 0 28px rgba(239,68,68,0.4)' } },
         'radar-spin':     { from: { transform: 'rotate(0deg)' }, to: { transform: 'rotate(360deg)' } },
         'shimmer':        { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
       },
@@ -37,12 +38,12 @@ export default {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
       boxShadow: {
-        'glow-sky':  '0 0 20px rgba(56,189,248,0.25)',
-        'glow-red':  '0 0 20px rgba(239,68,68,0.25)',
-        'glow-grn':  '0 0 20px rgba(34,197,94,0.25)',
-        'glow-amb':  '0 0 20px rgba(251,191,36,0.25)',
-        'panel':     '0 4px 24px rgba(0,0,0,0.4)',
-        'panel-lg':  '0 8px 48px rgba(0,0,0,0.5)',
+        'glow-sky':  '0 0 20px rgba(14,165,233,0.15)',
+        'glow-red':  '0 0 20px rgba(239,68,68,0.15)',
+        'glow-grn':  '0 0 20px rgba(22,163,74,0.15)',
+        'glow-amb':  '0 0 20px rgba(245,158,11,0.15)',
+        'panel':     '0 1px 8px rgba(0,0,0,0.08)',
+        'panel-lg':  '0 4px 24px rgba(0,0,0,0.12)',
       },
     },
   },

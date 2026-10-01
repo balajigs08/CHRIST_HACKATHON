@@ -18,9 +18,9 @@ export default function ResourceTable({ resources = [] }) {
   return (
     <div className="panel">
       <div className="panel-title">
-        <span className="text-blue-400">🚑</span>
+        <span className="text-blue-600">🚑</span>
         <span>Resource Fleet</span>
-        <span className="mono rounded-full bg-edge px-2 py-0.5 text-[10px] text-slate-400">
+        <span className="mono rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-600 font-bold">
           {resources.length}
         </span>
       </div>
@@ -57,13 +57,13 @@ export default function ResourceTable({ resources = [] }) {
                       >
                         {RESOURCE_GLYPH[r.type] || '?'}
                       </div>
-                      <span className="mono font-bold text-slate-200">{r.id}</span>
+                      <span className="mono font-bold text-slate-800">{r.id}</span>
                     </div>
                   </td>
                   <td>
                     <div className="flex items-center gap-1.5">
                       <span>{TYPE_ICON[r.type] || '🚗'}</span>
-                      <span className="text-slate-300">{pretty(r.type)}</span>
+                      <span className="text-slate-700 font-medium">{pretty(r.type)}</span>
                     </div>
                   </td>
                   <td>
@@ -83,30 +83,30 @@ export default function ResourceTable({ resources = [] }) {
                         {st.label}
                       </span>
                       {r.status_reason && (
-                        <p className="mt-0.5 text-[10px] text-slate-600">{r.status_reason}</p>
+                        <p className="mt-0.5 text-[10px] text-slate-500">{r.status_reason}</p>
                       )}
                     </div>
                   </td>
                   <td>
-                    <span className="mono text-xs text-slate-400">
+                    <span className="mono text-xs text-slate-500">
                       {r.latitude?.toFixed(3)}, {r.longitude?.toFixed(3)}
                     </span>
                   </td>
                   <td>
                     {r.current_assignment
-                      ? <span className="mono text-xs text-blue-300 font-semibold">{r.current_assignment}</span>
-                      : <span className="text-slate-600">—</span>
+                      ? <span className="mono text-xs text-blue-700 font-semibold">{r.current_assignment}</span>
+                      : <span className="text-slate-400">—</span>
                     }
                   </td>
                   <td>
                     {r.eta != null
                       ? (
                         <div className="flex items-center gap-1.5">
-                          <span className="text-green-400">⟳</span>
-                          <span className="mono text-xs text-slate-300">{r.eta} min</span>
+                          <span className="text-emerald-600">⟳</span>
+                          <span className="mono text-xs text-slate-700 font-semibold">{r.eta} min</span>
                         </div>
                       )
-                      : <span className="text-slate-600">—</span>
+                      : <span className="text-slate-400">—</span>
                     }
                   </td>
                 </tr>
@@ -117,17 +117,17 @@ export default function ResourceTable({ resources = [] }) {
       </div>
 
       {/* Fleet overview mini-grid */}
-      <div className="border-t border-edge px-4 py-3">
-        <p className="mb-2 text-[10px] uppercase tracking-widest text-slate-600">Fleet by type</p>
+      <div className="border-t border-slate-200 px-4 py-3 bg-slate-50/50">
+        <p className="mb-2 text-[10px] uppercase tracking-wider text-slate-500 font-bold">Fleet by type</p>
         <div className="flex flex-wrap gap-2">
           {Object.entries(grouped).map(([type, units]) => {
             const avail = units.filter(u => u.status === 'available').length
             const total = units.length
             return (
-              <div key={type} className="flex items-center gap-2 rounded-lg border border-edge bg-panel2/50 px-3 py-1.5 text-xs">
+              <div key={type} className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs shadow-2xs">
                 <span>{TYPE_ICON[type] || '🚗'}</span>
-                <span className="text-slate-400">{pretty(type)}</span>
-                <span className="mono font-bold" style={{ color: avail > 0 ? '#22c55e' : '#ef4444' }}>
+                <span className="text-slate-700 font-medium">{pretty(type)}</span>
+                <span className="mono font-bold" style={{ color: avail > 0 ? '#16a34a' : '#dc2626' }}>
                   {avail}/{total}
                 </span>
               </div>

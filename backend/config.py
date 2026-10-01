@@ -1,6 +1,7 @@
 """Configuration settings for Crisis Command backend foundation (Phase 1)."""
+import os
 from functools import lru_cache
-from typing import List, Union
+from typing import List, Optional, Union
 
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -74,11 +75,59 @@ class Settings(BaseSettings):
     road_circuity_factor: float = 1.3
     dispatch_delay_min: float = 1.0
 
+    # Authority Environment Credentials (never stored in DB/MongoDB)
+    authority_email: str = "authority@crisiscommand.gov"
+    authority_password_hash: str = ""
+    authority_password: str = "AuthorityPassword123!"
+    authority_password_salt: str = "cc_authority_salt_2026"
+
+    # SMTP Configuration
+    smtp_host: str = ""
+    smtp_port: int = 587
+    smtp_username: str = ""
+    smtp_email: str = ""  # alias for smtp_username
+    smtp_password: str = ""
+    smtp_from_email: str = ""
+    from_email: str = ""  # alias for smtp_from_email
+    smtp_from_name: str = "Crisis Command"
+    from_name: str = ""  # alias for smtp_from_name
+    smtp_use_tls: bool = True
+    smtp_use_ssl: bool = False
+    smtp_timeout_seconds: float = 10.0
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def parse_cors_origins(cls, v: Union[str, List[str]]) -> List[str]:
         if isinstance(v, str):
             return [origin.strip() for origin in v.split(",") if origin.strip()]
+        return v
+
+    @field_validator("smtp_username", mode="before")
+    @classmethod
+    def resolve_smtp_username(cls, v: str) -> str:
+        if not v:
+            return os.getenv("SMTP_USERNAME") or os.getenv("SMTP_EMAIL") or os.getenv("SMTP_USER") or ""
+        return v
+
+    @field_validator("smtp_from_email", mode="before")
+    @classmethod
+    def resolve_smtp_from_email(cls, v: str) -> str:
+        if not v:
+            return (
+                os.getenv("SMTP_FROM_EMAIL")
+                or os.getenv("FROM_EMAIL")
+                or os.getenv("SMTP_FROM")
+                or os.getenv("SMTP_USERNAME")
+                or os.getenv("SMTP_EMAIL")
+                or ""
+            )
+        return v
+
+    @field_validator("smtp_from_name", mode="before")
+    @classmethod
+    def resolve_smtp_from_name(cls, v: str) -> str:
+        if not v or v == "Crisis Command":
+            return os.getenv("SMTP_FROM_NAME") or os.getenv("FROM_NAME") or "Crisis Command"
         return v
 
     model_config = SettingsConfigDict(

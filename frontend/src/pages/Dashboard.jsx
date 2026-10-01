@@ -30,7 +30,7 @@ export default function Dashboard() {
   const criticalCount    = realtime.incidents.filter(i => i.severity === 'critical' && i.status !== 'resolved').length
 
   return (
-    <div className="flex min-h-screen flex-col bg-ink">
+    <div className="flex min-h-screen flex-col bg-slate-50">
       {/* ── Live Toast Notification (Phase 11 Requirement 5) ── */}
       <RealtimeEventToast
         notification={realtime.latestNotification}
@@ -64,12 +64,12 @@ export default function Dashboard() {
         {/* Main content */}
         <main className="flex-1 overflow-y-auto pb-20 lg:pb-0">
           {/* Tab title bar */}
-          <div className="sticky top-0 z-20 flex items-center gap-3 border-b border-edge bg-surface/90 px-5 py-2.5 backdrop-blur-xl">
-            <h2 className="text-sm font-bold text-slate-300 capitalize">{TAB_TITLES[activeTab] || activeTab}</h2>
-            <span className="text-slate-700">·</span>
-            <span className="mono text-[11px] text-slate-600">mock data · real-time enabled</span>
+          <div className="sticky top-0 z-20 flex items-center gap-3 border-b border-slate-200 bg-white px-5 py-2.5">
+            <h2 className="text-sm font-bold text-slate-700 capitalize">{TAB_TITLES[activeTab] || activeTab}</h2>
+            <span className="text-slate-300">·</span>
+            <span className="mono text-[11px] text-slate-400">mock data · real-time enabled</span>
             {activeTab === 'dashboard' && pendingApprovals > 0 && (
-              <div className="ml-auto flex items-center gap-1.5 rounded-full border border-red-500/30 bg-red-500/08 px-2.5 py-1 text-[11px] font-semibold text-red-400 animate-flash">
+              <div className="ml-auto flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50 px-2.5 py-1 text-[11px] font-semibold text-red-600 animate-flash">
                 ⚠ {pendingApprovals} approval{pendingApprovals > 1 ? 's' : ''} required
               </div>
             )}
@@ -142,7 +142,7 @@ function DashboardHome({ realtime }) {
       {/* Map + Incidents (2-col on large) */}
       <div className="grid gap-4 xl:grid-cols-5">
         <div className="xl:col-span-3">
-          <LiveMapPlaceholder />
+          <LiveMapPlaceholder incidents={realtime?.incidents} resources={realtime?.resources} />
         </div>
         <div className="xl:col-span-2">
           <ActiveIncidentsPanel incidents={realtime?.incidents} />
@@ -169,31 +169,31 @@ function PlanHistoryPanel() {
   return (
     <div className="panel">
       <div className="panel-title">
-        <span className="text-purple-400">🔄</span>
+        <span className="text-purple-600">🔄</span>
         <span>Plan Change History</span>
       </div>
-      <div className="divide-y divide-edge/50">
+      <div className="divide-y divide-slate-200">
         {MOCK_PLAN_HISTORY.map(h => (
           <div key={h.plan_id} className="px-4 py-3">
             <div className="flex items-baseline gap-2 flex-wrap mb-1.5">
-              <span className="mono text-xs font-bold text-slate-200">{h.plan_id}</span>
-              <span className="text-slate-600 text-[11px]">{timeSince(h.created_at)}</span>
-              <span className="text-[11px] text-amber-300 ml-auto italic">{h.trigger}</span>
+              <span className="mono text-xs font-bold text-slate-800">{h.plan_id}</span>
+              <span className="text-slate-500 text-[11px]">{timeSince(h.created_at)}</span>
+              <span className="text-[11px] text-amber-800 font-semibold ml-auto italic">{h.trigger}</span>
             </div>
             <div className="flex flex-wrap gap-1.5 mb-2">
               {(h.changes || []).map((c, i) => (
-                <span key={i} className="text-[11px] rounded-md border px-2 py-0.5"
+                <span key={i} className="text-[11px] font-medium rounded-md border px-2 py-0.5"
                   style={
-                    c.type === 'added'   ? { color:'#86efac', borderColor:'rgba(34,197,94,0.3)',   background:'rgba(34,197,94,0.08)'   } :
-                    c.type === 'removed' ? { color:'#fca5a5', borderColor:'rgba(239,68,68,0.3)',   background:'rgba(239,68,68,0.08)'   } :
-                    { color:'#fcd34d', borderColor:'rgba(251,191,36,0.3)', background:'rgba(251,191,36,0.08)' }
+                    c.type === 'added'   ? { color:'#15803d', borderColor:'#bbf7d0', background:'#f0fdf4' } :
+                    c.type === 'removed' ? { color:'#b91c1c', borderColor:'#fecaca', background:'#fef2f2' } :
+                    { color:'#b45309', borderColor:'#fde68a', background:'#fffbeb' }
                   }
                 >
                   {c.type === 'added' ? '+' : c.type === 'removed' ? '−' : '~'} {c.text}
                 </span>
               ))}
             </div>
-            <p className="text-xs text-slate-500 italic border-l-2 border-purple-500/30 pl-2">{h.reason}</p>
+            <p className="text-xs text-slate-600 italic border-l-2 border-purple-400 pl-2 bg-purple-50/30 py-1 rounded-r">{h.reason}</p>
           </div>
         ))}
       </div>

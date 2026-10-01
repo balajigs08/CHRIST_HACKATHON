@@ -58,32 +58,32 @@ export default function RealtimeStatusBadge({
   const STATUS_CONFIG = {
     connected: {
       label: 'Connected',
-      dotClass: 'bg-emerald-400 animate-pulse',
-      borderClass: 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300',
-      pingClass: 'bg-emerald-400',
-      glow: '0 0 10px rgba(52,211,153,0.3)',
+      dotClass: 'bg-emerald-500 animate-pulse',
+      borderClass: 'border-emerald-300 bg-emerald-50 text-emerald-700',
+      pingClass: 'bg-emerald-500',
+      glow: 'none',
       icon: '●',
     },
     connecting: {
       label: 'Connecting...',
-      dotClass: 'bg-amber-400 animate-spin',
-      borderClass: 'border-amber-500/40 bg-amber-500/10 text-amber-300',
-      pingClass: 'bg-amber-400',
-      glow: '0 0 10px rgba(251,191,36,0.3)',
+      dotClass: 'bg-amber-500 animate-spin',
+      borderClass: 'border-amber-300 bg-amber-50 text-amber-700',
+      pingClass: 'bg-amber-500',
+      glow: 'none',
       icon: '◌',
     },
     reconnecting: {
       label: 'Reconnecting...',
-      dotClass: 'bg-orange-400 animate-ping',
-      borderClass: 'border-orange-500/40 bg-orange-500/10 text-orange-300',
-      pingClass: 'bg-orange-400',
-      glow: '0 0 10px rgba(251,146,60,0.3)',
+      dotClass: 'bg-orange-500 animate-ping',
+      borderClass: 'border-orange-300 bg-orange-50 text-orange-700',
+      pingClass: 'bg-orange-500',
+      glow: 'none',
       icon: '⟳',
     },
     disconnected: {
       label: 'Disconnected',
       dotClass: 'bg-rose-500',
-      borderClass: 'border-rose-500/40 bg-rose-500/10 text-rose-300',
+      borderClass: 'border-rose-300 bg-rose-50 text-rose-700',
       pingClass: 'bg-rose-500',
       glow: 'none',
       icon: '✕',
@@ -109,10 +109,10 @@ export default function RealtimeStatusBadge({
         </button>
 
         {/* Live Updates Indicator (Requirement 8) */}
-        <div className="hidden sm:flex items-center gap-1.5 rounded-full border border-edge bg-panel/70 px-2.5 py-1 text-[11px] font-mono text-slate-400">
-          <span className="h-1.5 w-1.5 rounded-full bg-sky-400 animate-pulse" />
-          <span className="font-semibold text-slate-300">LIVE</span>
-          <span className="text-slate-600">·</span>
+        <div className="hidden sm:flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-mono text-slate-500">
+          <span className="h-1.5 w-1.5 rounded-full bg-sky-500 animate-pulse" />
+          <span className="font-semibold text-slate-700">LIVE</span>
+          <span className="text-slate-300">·</span>
           <span>
             {elapsedSeconds === 0 ? 'just now' : `${elapsedSeconds}s ago`}
           </span>
@@ -121,12 +121,12 @@ export default function RealtimeStatusBadge({
 
       {/* ── Interactive Dropdown Menu for Controls ── */}
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 z-50 w-72 rounded-2xl border border-edge/80 bg-slate-950/95 p-4 shadow-2xl backdrop-blur-2xl space-y-3.5 animate-fade-in">
-          <div className="flex items-center justify-between border-b border-edge/60 pb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
+        <div className="absolute right-0 top-full mt-2 z-50 w-72 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl space-y-3.5">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-700">
               ⚡ Real-time Telemetry Menu
             </span>
-            <span className="text-[10px] font-mono text-slate-500">Phase 11</span>
+            <span className="text-[10px] font-mono text-slate-400">Phase 11</span>
           </div>
 
           {/* 1. Connection State Switcher */}
@@ -144,8 +144,8 @@ export default function RealtimeStatusBadge({
                   }}
                   className={`rounded-lg px-2.5 py-1 text-xs font-mono text-left capitalize transition-all ${
                     status === s
-                      ? 'bg-sky-500/20 text-sky-300 border border-sky-500/40 font-bold'
-                      : 'bg-surface/60 text-slate-400 hover:bg-surface hover:text-white border border-edge'
+                      ? 'bg-sky-100 text-sky-700 border border-sky-300 font-bold'
+                      : 'bg-slate-50 text-slate-500 hover:bg-slate-100 hover:text-slate-900 border border-slate-200'
                   }`}
                 >
                   {s}
@@ -155,7 +155,7 @@ export default function RealtimeStatusBadge({
           </div>
 
           {/* 2. Manual Mock Event Trigger */}
-          <div className="space-y-1.5 pt-1 border-t border-edge/60">
+          <div className="space-y-1.5 pt-1 border-t border-slate-200">
             <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
               Inject Mock Real-time Event:
             </div>
@@ -170,18 +170,18 @@ export default function RealtimeStatusBadge({
           </div>
 
           {/* 3. Auto-Stream Toggle */}
-          <div className="pt-1 border-t border-edge/60">
+          <div className="pt-1 border-t border-slate-200">
             <button
               onClick={() => {
                 if (onToggleAutoStream) onToggleAutoStream()
               }}
               className={`w-full flex items-center justify-center gap-2 rounded-xl border px-3 py-1.5 text-xs font-semibold transition-all ${
                 autoStreamActive
-                  ? 'border-emerald-500/40 bg-emerald-500/15 text-emerald-300'
-                  : 'border-edge bg-surface/60 text-slate-400 hover:text-slate-200'
+                  ? 'border-emerald-300 bg-emerald-50 text-emerald-700'
+                  : 'border-slate-200 bg-slate-50 text-slate-500 hover:text-slate-900'
               }`}
             >
-              <span className={`h-2 w-2 rounded-full ${autoStreamActive ? 'bg-emerald-400 animate-ping' : 'bg-slate-600'}`} />
+              <span className={`h-2 w-2 rounded-full ${autoStreamActive ? 'bg-emerald-500 animate-ping' : 'bg-slate-300'}`} />
               <span>
                 {autoStreamActive ? 'Auto-Stream ON (Every 8s)' : 'Enable Auto-Stream'}
               </span>

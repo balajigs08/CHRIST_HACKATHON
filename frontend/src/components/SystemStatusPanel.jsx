@@ -69,7 +69,7 @@ export default function SystemStatusPanel() {
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <span className="text-base">{info.icon}</span>
-                  <span className="text-xs font-semibold text-slate-300">{info.label}</span>
+                  <span className="text-xs font-semibold text-slate-700">{info.label}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className={`h-2 w-2 rounded-full flex-shrink-0 ${cfg.dot}`} />
@@ -80,15 +80,15 @@ export default function SystemStatusPanel() {
               </div>
 
               {/* Description */}
-              <p className="mt-1.5 text-[11px] text-slate-600 leading-relaxed">{info.desc}</p>
+              <p className="mt-1.5 text-[11px] text-slate-500 leading-relaxed">{info.desc}</p>
 
               {/* Mode */}
-              <p className="mt-1 mono text-[10px] text-slate-600 italic">{s.mode}</p>
+              <p className="mt-1 mono text-[10px] text-slate-400 italic">{s.mode}</p>
 
               {/* Latency */}
               {s.latency_ms != null && (
                 <div className="mt-2 flex items-center gap-1.5">
-                  <div className="h-1 flex-1 rounded-full bg-edge overflow-hidden">
+                  <div className="h-1 flex-1 rounded-full bg-slate-200 overflow-hidden">
                     <div
                       className="h-full rounded-full"
                       style={{
@@ -97,7 +97,7 @@ export default function SystemStatusPanel() {
                       }}
                     />
                   </div>
-                  <span className="mono text-[10px] text-slate-600">{s.latency_ms}ms</span>
+                  <span className="mono text-[10px] text-slate-500">{s.latency_ms}ms</span>
                 </div>
               )}
             </div>
@@ -106,8 +106,8 @@ export default function SystemStatusPanel() {
       </div>
 
       {/* Mock mode notice */}
-      <div className="border-t border-edge px-4 py-2.5 text-center text-[11px] text-slate-600">
-        Running in <span className="text-amber-400 font-semibold">mock / demo mode</span> — no backend required.
+      <div className="border-t border-slate-200 px-4 py-2.5 text-center text-[11px] text-slate-400">
+        Running in <span className="text-amber-600 font-semibold">mock / demo mode</span> — no backend required.
         Start <span className="mono text-slate-500">uvicorn main:app --port 8000</span> to go live.
       </div>
     </div>

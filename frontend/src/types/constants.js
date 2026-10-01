@@ -1,19 +1,19 @@
 // Shared visual + label constants (the "types" of the domain)
 export const SEVERITY = {
-  critical: { label: 'Critical', color: '#ef4444', badge: 'bg-red-500/20 text-red-300 border-red-500/40' },
-  high:     { label: 'High',     color: '#f97316', badge: 'bg-orange-500/20 text-orange-300 border-orange-500/40' },
-  medium:   { label: 'Medium',   color: '#eab308', badge: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40' },
-  low:      { label: 'Low',      color: '#38bdf8', badge: 'bg-sky-500/20 text-sky-300 border-sky-500/40' },
+  critical: { label: 'Critical', color: '#dc2626', badge: 'bg-red-50 text-red-700 border-red-200 font-bold' },
+  high:     { label: 'High',     color: '#ea580c', badge: 'bg-orange-50 text-orange-700 border-orange-200 font-bold' },
+  medium:   { label: 'Medium',   color: '#d97706', badge: 'bg-amber-50 text-amber-700 border-amber-200 font-bold' },
+  low:      { label: 'Low',      color: '#0284c7', badge: 'bg-sky-50 text-sky-700 border-sky-200 font-bold' },
 }
 
 export const RESOURCE_STATUS = {
-  available:   { label: 'Available',   color: '#22c55e', badge: 'bg-green-500/20 text-green-300 border-green-500/40' },
-  assigned:    { label: 'Assigned',    color: '#3b82f6', badge: 'bg-blue-500/20 text-blue-300 border-blue-500/40' },
-  unavailable: { label: 'Unavailable', color: '#ef4444', badge: 'bg-red-500/20 text-red-300 border-red-500/40' },
-  maintenance: { label: 'Maintenance', color: '#a855f7', badge: 'bg-purple-500/20 text-purple-300 border-purple-500/40' },
-  deploying:   { label: 'Deploying',   color: '#fbbf24', badge: 'bg-amber-500/20 text-amber-300 border-amber-500/40' },
-  en_route:    { label: 'En Route',    color: '#38bdf8', badge: 'bg-sky-500/20 text-sky-300 border-sky-500/40' },
-  on_scene:    { label: 'On Scene',    color: '#22c55e', badge: 'bg-green-500/20 text-green-300 border-green-500/40' },
+  available:   { label: 'Available',   color: '#16a34a', badge: 'bg-emerald-50 text-emerald-700 border-emerald-200 font-bold' },
+  assigned:    { label: 'Assigned',    color: '#0284c7', badge: 'bg-sky-50 text-sky-700 border-sky-200 font-bold' },
+  unavailable: { label: 'Unavailable', color: '#dc2626', badge: 'bg-red-50 text-red-700 border-red-200 font-bold' },
+  maintenance: { label: 'Maintenance', color: '#7c3aed', badge: 'bg-purple-50 text-purple-700 border-purple-200 font-bold' },
+  deploying:   { label: 'Deploying',   color: '#d97706', badge: 'bg-amber-50 text-amber-700 border-amber-200 font-bold' },
+  en_route:    { label: 'En Route',    color: '#0284c7', badge: 'bg-sky-50 text-sky-700 border-sky-200 font-bold' },
+  on_scene:    { label: 'On Scene',    color: '#16a34a', badge: 'bg-emerald-50 text-emerald-700 border-emerald-200 font-bold' },
 }
 
 export const RESOURCE_GLYPH = {
@@ -44,17 +44,17 @@ export const RESOURCE_TYPE_LABELS = {
 }
 
 export const INCIDENT_STATUS = {
-  assigned: { label: 'Assigned', color: '#38bdf8', badge: 'bg-sky-500/15 text-sky-300 border-sky-500/35' },
-  waiting:  { label: 'Waiting',  color: '#c084fc', badge: 'bg-purple-500/15 text-purple-300 border-purple-500/35' },
-  resolved: { label: 'Resolved', color: '#4ade80', badge: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/35' },
+  assigned: { label: 'Assigned', color: '#0284c7', badge: 'bg-sky-50 text-sky-700 border-sky-200 font-bold' },
+  waiting:  { label: 'Waiting',  color: '#7c3aed', badge: 'bg-purple-50 text-purple-700 border-purple-200 font-bold' },
+  resolved: { label: 'Resolved', color: '#16a34a', badge: 'bg-emerald-50 text-emerald-700 border-emerald-200 font-bold' },
 }
 
 export const PLAN_STATUS = {
-  active:             { label: 'Active',             color: '#22c55e', badge: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' },
-  pending:            { label: 'Pending',            color: '#eab308', badge: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40' },
-  updated:            { label: 'Updated',            color: '#38bdf8', badge: 'bg-sky-500/20 text-sky-300 border-sky-500/40' },
-  completed:          { label: 'Completed',          color: '#94a3b8', badge: 'bg-slate-500/20 text-slate-300 border-slate-500/40' },
-  requires_attention: { label: 'Requires Attention', color: '#ef4444', badge: 'bg-red-500/20 text-red-300 border-red-500/40 animate-flash' },
+  active:             { label: 'Active',             color: '#16a34a', badge: 'bg-emerald-50 text-emerald-700 border-emerald-200 font-bold' },
+  pending:            { label: 'Pending',            color: '#d97706', badge: 'bg-amber-50 text-amber-700 border-amber-200 font-bold' },
+  updated:            { label: 'Updated',            color: '#0284c7', badge: 'bg-sky-50 text-sky-700 border-sky-200 font-bold' },
+  completed:          { label: 'Completed',          color: '#64748b', badge: 'bg-slate-100 text-slate-700 border-slate-200 font-bold' },
+  requires_attention: { label: 'Requires Attention', color: '#dc2626', badge: 'bg-red-50 text-red-700 border-red-200 font-bold animate-flash' },
 }
 
 export const INCIDENT_ICON = {

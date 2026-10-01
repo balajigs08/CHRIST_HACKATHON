@@ -117,9 +117,13 @@ class IncidentStore:
         status: Optional[str] = None,
         incident_type: Optional[str] = None,
         search: Optional[str] = None,
+        reporter_id: Optional[str] = None,
     ) -> List[IncidentResponse]:
         """Return incidents with optional filtering."""
         incidents = list(self._store.values())
+
+        if reporter_id:
+            incidents = [i for i in incidents if i.reporter_id == reporter_id]
 
         if severity:
             sev = severity.lower().strip()
@@ -149,7 +153,12 @@ class IncidentStore:
     def get_by_id(self, incident_id: str) -> Optional[IncidentResponse]:
         return self._store.get(incident_id)
 
-    def create(self, payload: IncidentCreate, actor: str = "operator") -> IncidentResponse:
+    def create(
+        self,
+        payload: IncidentCreate,
+        actor: str = "operator",
+        reporter_id: Optional[str] = None,
+    ) -> IncidentResponse:
         """Create and store a new incident; emit an audit event."""
         inc_id = (
             payload.incident_id
@@ -160,6 +169,7 @@ class IncidentStore:
             # Prefer a fresh ID if the provided one already exists
             inc_id = f"inc-{uuid4().hex[:8]}"
 
+        actual_reporter = reporter_id or payload.reporter_id
         now = utc_now()
         inc = IncidentResponse(
             id=inc_id,
@@ -172,6 +182,7 @@ class IncidentStore:
             urgency=payload.urgency,
             status=payload.status,
             required_resources=payload.required_resources,
+            reporter_id=actual_reporter,
             created_at=now,
             updated_at=now,
         )

@@ -28,6 +28,7 @@ class ResourceType(str, Enum):
     rescue_team = "rescue_team"
     medical_unit = "medical_unit"
     shelter = "shelter"
+    police = "police"
 
 
 class ResourceStatus(str, Enum):
@@ -78,6 +79,7 @@ class Incident(BaseModel):
     assigned_resources: list[str] = Field(default_factory=list)
     # derived / informational
     location_name: Optional[str] = None
+    reporter_id: Optional[str] = None
     effective_priority: float = 0.0
     missing_resources: list[ResourceType] = Field(default_factory=list)
     assessment_confidence: Optional[float] = None

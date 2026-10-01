@@ -2,8 +2,18 @@ import axios from 'axios'
 
 const http = axios.create({ baseURL: import.meta.env.VITE_API_URL || '', timeout: 30000 })
 
+// Automatically attach JWT token to all requests if authenticated
+http.interceptors.request.use((config) => {
+  const token = localStorage.getItem('crisis_auth_token')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+})
+
 export function errorMessage(err) {
-  if (err.response?.data?.error) return err.response.data.error.message
+  if (err.response?.data?.detail) return typeof err.response.data.detail === 'string' ? err.response.data.detail : JSON.stringify(err.response.data.detail)
+  if (err.response?.data?.error?.message) return err.response.data.error.message
   if (err.code === 'ECONNABORTED') return 'Request timed out'
   if (!err.response) return 'Backend unavailable — is the API running on port 8000?'
   return err.message
@@ -15,8 +25,21 @@ const put = (url, body = {}) => http.put(url, body).then((r) => r.data)
 const del = (url) => http.delete(url).then((r) => r.data)
 
 export const api = {
+  // Authentication & OTP (Citizen & Regional Authority)
+  auth: {
+    register: (data) => post('/api/auth/register', data),
+    verifyOtp: (data) => post('/api/auth/verify-otp', data),
+    resendOtp: (data) => post('/api/auth/resend-otp', data),
+    login: (data) => post('/api/auth/login', data),
+    authorityLogin: (data) => post('/api/auth/authority-login', data),
+    authorityRegister: (data) => post('/api/auth/authority-register', data),
+    authorityStatus: () => get('/api/auth/authority-status'),
+    me: () => get('/api/auth/me'),
+  },
+
   // System & Health
   health: () => get('/api/health'),
+
   wsStatus: () => get('/api/ws/status'),
   state: () => get('/api/state').catch(() => null),
 

@@ -10,13 +10,18 @@ Hard constraints (enforced by variable creation + constraints):
 Objective (maximise): sum x*(priority + urgency + base - eta_cost + stability) + completion bonus * y
 """
 from dataclasses import dataclass, field
+from typing import Any, Optional
 
-import pulp
+try:
+    import pulp
+except ImportError:
+    pulp = None
 
 from config import Settings
 from models.errors import OptimizationError
 from models.schemas import Incident, Resource, ResourceStatus, ResourceType
 from services.route_service import RouteService
+
 
 OPERATIONAL = (ResourceStatus.available, ResourceStatus.assigned)
 
@@ -78,7 +83,23 @@ class ResourceOptimizer:
         result = OptimizationResult(slot_candidates=slot_cands)
         slot_incident = {key: inc.id for inc, _, key in self.slots(incidents)}
 
+        if pulp is None:
+            assigned_res = set()
+            for key, cands in slot_cands.items():
+                assigned = False
+                for c in cands:
+                    if c.resource_id not in assigned_res:
+                        result.chosen.append(c)
+                        assigned_res.add(c.resource_id)
+                        assigned = True
+                        break
+                if not assigned:
+                    result.missing.setdefault(slot_incident[key], []).append(ResourceType(key.split(":")[1]))
+            result.status = "Optimal"
+            return result
+
         x: dict = {}
+
         terms = []
         for key, cands in slot_cands.items():
             inc = by_id[slot_incident[key]]

@@ -38,9 +38,9 @@ export default function EventTimeline({ events = [] }) {
     <div className="panel flex flex-col" style={{ maxHeight: '600px' }}>
       {/* Header */}
       <div className="panel-title flex-wrap gap-2">
-        <span className="text-amber-400">📜</span>
+        <span className="text-amber-600">📜</span>
         <span>Audit Log</span>
-        <span className="mono rounded-full bg-edge px-2 py-0.5 text-[10px] text-slate-400">
+        <span className="mono rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-600 font-bold">
           {events.length}
         </span>
         {/* Filter chips */}
@@ -51,8 +51,8 @@ export default function EventTimeline({ events = [] }) {
               onClick={() => setFilter(g.id)}
               className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold transition-all ${
                 filter === g.id
-                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                  : 'text-slate-500 hover:text-slate-300'
+                  ? 'bg-amber-100 text-amber-800 border border-amber-300'
+                  : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
               }`}
             >
               {g.label}
@@ -64,10 +64,10 @@ export default function EventTimeline({ events = [] }) {
       {/* Timeline */}
       <ol className="flex-1 overflow-y-auto px-4 py-3 space-y-0.5">
         {rows.length === 0 && (
-          <li className="py-8 text-center text-slate-600">
+          <li className="py-8 text-center text-slate-500">
             <div className="flex flex-col items-center gap-2">
               <span className="text-2xl">📋</span>
-              <span className="text-sm">No events yet</span>
+              <span className="text-sm font-medium">No events yet</span>
             </div>
           </li>
         )}
@@ -79,7 +79,7 @@ export default function EventTimeline({ events = [] }) {
           return (
             <li key={e.id}>
               <button
-                className="w-full text-left rounded-lg px-3 py-2.5 transition-all hover:bg-panel2/60 group"
+                className="w-full text-left rounded-lg px-3 py-2.5 transition-all hover:bg-slate-50 group border border-transparent hover:border-slate-200"
                 style={{ background: isOpen ? cfg.bg : undefined }}
                 onClick={() => setExpanded(isOpen ? null : e.id)}
               >
@@ -96,17 +96,17 @@ export default function EventTimeline({ events = [] }) {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-baseline gap-2 flex-wrap">
                       <span
-                        className="text-[11px] font-semibold"
+                        className="text-[11px] font-bold"
                         style={{ color: cfg.color }}
                       >
                         {cfg.label}
                       </span>
-                      <span className="mono text-[10px] text-slate-600">{e.id}</span>
-                      <span className="mono text-[10px] text-slate-600 ml-auto">{fmtTime(e.timestamp)}</span>
+                      <span className="mono text-[10px] text-slate-400">{e.id}</span>
+                      <span className="mono text-[10px] text-slate-500 ml-auto">{fmtTime(e.timestamp)}</span>
                     </div>
-                    <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">{e.description}</p>
+                    <p className="text-xs text-slate-700 mt-0.5 leading-relaxed font-normal">{e.description}</p>
                     {isOpen && e.reason && e.reason !== e.description && (
-                      <p className="mt-1.5 text-[11px] text-slate-500 border-l-2 border-edge pl-2 italic slide-up">
+                      <p className="mt-1.5 text-[11px] text-slate-600 border-l-2 border-slate-300 pl-2 italic slide-up bg-slate-50 p-1 rounded-r">
                         {e.reason}
                       </p>
                     )}
@@ -114,7 +114,7 @@ export default function EventTimeline({ events = [] }) {
 
                   {/* Expand arrow */}
                   {(e.reason && e.reason !== e.description) && (
-                    <span className={`text-slate-600 text-xs transition-transform ${isOpen ? 'rotate-180' : ''}`}>
+                    <span className={`text-slate-400 text-xs transition-transform ${isOpen ? 'rotate-180' : ''}`}>
                       ▾
                     </span>
                   )}

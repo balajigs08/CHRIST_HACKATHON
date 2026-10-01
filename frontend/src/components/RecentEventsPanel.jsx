@@ -38,7 +38,7 @@ export default function RecentEventsPanel({ maxItems = 12, events: propEvents })
       <div className="panel-title flex-wrap gap-2">
         <span className="text-amber-400">📜</span>
         <span>Recent Events</span>
-        <span className="mono rounded-full bg-edge px-2 py-0.5 text-[10px] text-slate-400">
+        <span className="mono rounded-full bg-slate-100 border border-slate-200 px-2 py-0.5 text-[10px] text-slate-500">
           {eventList.length}
         </span>
         <div className="ml-auto flex flex-wrap gap-1 normal-case">
@@ -48,8 +48,8 @@ export default function RecentEventsPanel({ maxItems = 12, events: propEvents })
               onClick={() => setFilter(f.id)}
               className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold transition-all ${
                 filter === f.id
-                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                  : 'text-slate-600 hover:text-slate-400'
+                  ? 'bg-amber-100 text-amber-700 border border-amber-200'
+                  : 'text-slate-500 hover:text-slate-700'
               }`}
             >
               {f.label}
@@ -58,16 +58,16 @@ export default function RecentEventsPanel({ maxItems = 12, events: propEvents })
         </div>
       </div>
 
-      <ol className="flex-1 overflow-y-auto divide-y divide-edge/30">
+      <ol className="flex-1 overflow-y-auto divide-y divide-slate-100">
         {shown.length === 0 && (
-          <li className="py-8 text-center text-slate-600 text-sm">No events</li>
+          <li className="py-8 text-center text-slate-400 text-sm">No events</li>
         )}
         {shown.map(e => {
           const cfg = EVENT_CFG[e.event_type] || DEF
           const isCrit = e.event_type === 'HUMAN_APPROVAL_REQUIRED' || e.event_type === 'BOUNDARY_COLLAPSE'
 
           return (
-            <li key={e.id} className="px-4 py-2.5 hover:bg-panel2/40 transition-colors">
+            <li key={e.id} className="px-4 py-2.5 hover:bg-slate-50 transition-colors">
               <div className="flex items-start gap-2.5">
                 <div
                   className={`mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full text-[10px] ${isCrit ? 'animate-flash' : ''}`}
@@ -78,10 +78,10 @@ export default function RecentEventsPanel({ maxItems = 12, events: propEvents })
                 <div className="flex-1 min-w-0">
                   <div className="flex items-baseline gap-2 flex-wrap">
                     <span className="text-[11px] font-semibold" style={{ color: cfg.color }}>{cfg.label}</span>
-                    <span className="mono text-[10px] text-slate-700">{e.id}</span>
-                    <span className="mono text-[10px] text-slate-700 ml-auto">{timeSince(e.timestamp)}</span>
+                    <span className="mono text-[10px] text-slate-400">{e.id}</span>
+                    <span className="mono text-[10px] text-slate-400 ml-auto">{timeSince(e.timestamp)}</span>
                   </div>
-                  <p className="text-xs text-slate-400 leading-relaxed mt-0.5">{e.description}</p>
+                  <p className="text-xs text-slate-500 leading-relaxed mt-0.5">{e.description}</p>
                 </div>
               </div>
             </li>

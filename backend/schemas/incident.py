@@ -23,6 +23,10 @@ class IncidentBase(BaseSchema):
         default_factory=list,
         description="Required types of emergency response units"
     )
+    reporter_id: Optional[str] = Field(
+        default=None,
+        description="Authenticated user ID who reported the incident"
+    )
 
     @field_validator("severity", mode="before")
     @classmethod

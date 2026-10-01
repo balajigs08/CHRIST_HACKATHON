@@ -34,21 +34,21 @@ export default function LiveMap({ incidents = [], resources = [], assignments = 
     <div className="panel overflow-hidden">
       {/* Header */}
       <div className="panel-title">
-        <span className="text-sky-400">📍</span>
+        <span className="text-sky-600">📍</span>
         <span>Live Tactical Map</span>
-        <span className="text-slate-600 font-normal normal-case ml-1">· simulated coordinates</span>
+        <span className="text-slate-500 font-normal normal-case ml-1">· simulated coordinates</span>
         <div className="ml-auto flex items-center gap-2 normal-case">
           <button
             onClick={() => setShowLabels(l => !l)}
-            className={`rounded-md border px-2 py-0.5 text-[10px] transition-all ${
-              showLabels ? 'border-sky-500/30 bg-sky-500/10 text-sky-400' : 'border-edge text-slate-600'
+            className={`rounded-md border px-2.5 py-0.5 text-[10px] font-semibold transition-all ${
+              showLabels ? 'border-sky-300 bg-sky-50 text-sky-700' : 'border-slate-200 bg-white text-slate-600'
             }`}
           >
             Labels
           </button>
-          <div className="flex items-center gap-1">
-            <span className="h-1.5 w-1.5 rounded-full bg-sky-400 animate-flash" />
-            <span className="text-[10px] text-sky-400 font-semibold">LIVE</span>
+          <div className="flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-[10px] text-emerald-700 font-bold">LIVE</span>
           </div>
         </div>
       </div>
@@ -63,10 +63,10 @@ export default function LiveMap({ incidents = [], resources = [], assignments = 
           {/* Background city blocks */}
           <defs>
             <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(28,46,71,0.4)" strokeWidth="0.5" />
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(203,213,225,0.6)" strokeWidth="0.5" />
             </pattern>
             <radialGradient id="mapGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%"   stopColor="rgba(56,189,248,0.05)" />
+              <stop offset="0%"   stopColor="rgba(2,132,199,0.05)" />
               <stop offset="100%" stopColor="transparent" />
             </radialGradient>
             <filter id="blur-sm">
@@ -81,9 +81,9 @@ export default function LiveMap({ incidents = [], resources = [], assignments = 
           {[0.2, 0.4, 0.6, 0.8].map(f => (
             <g key={f}>
               <line x1={PAD} y1={PAD + (H - 2*PAD)*f} x2={W-PAD} y2={PAD + (H - 2*PAD)*f}
-                stroke="rgba(30,50,80,0.7)" strokeWidth="6" />
+                stroke="rgba(203,213,225,0.8)" strokeWidth="6" />
               <line x1={PAD + (W - 2*PAD)*f} y1={PAD} x2={PAD + (W - 2*PAD)*f} y2={H-PAD}
-                stroke="rgba(30,50,80,0.7)" strokeWidth="6" />
+                stroke="rgba(203,213,225,0.8)" strokeWidth="6" />
             </g>
           ))}
 
@@ -95,10 +95,10 @@ export default function LiveMap({ incidents = [], resources = [], assignments = 
               <g key={a.id}>
                 {/* Glow line */}
                 <line x1={r[0]} y1={r[1]} x2={i[0]} y2={i[1]}
-                  stroke="#38bdf8" strokeWidth="4" opacity="0.12" filter="url(#blur-sm)" />
+                  stroke="#0284c7" strokeWidth="4" opacity="0.12" filter="url(#blur-sm)" />
                 {/* Actual line */}
                 <line x1={r[0]} y1={r[1]} x2={i[0]} y2={i[1]}
-                  stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.75"
+                  stroke="#0284c7" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.8"
                   style={{ animation: 'none' }}
                 />
                 {/* Arrow at midpoint */}
@@ -106,7 +106,7 @@ export default function LiveMap({ incidents = [], resources = [], assignments = 
                   cx={(r[0] + i[0]) / 2}
                   cy={(r[1] + i[1]) / 2}
                   r="2.5"
-                  fill="#38bdf8" opacity="0.8"
+                  fill="#0284c7" opacity="0.9"
                 />
               </g>
             )
@@ -125,11 +125,11 @@ export default function LiveMap({ incidents = [], resources = [], assignments = 
                 onClick={e => { e.stopPropagation(); setSelected(r.id === selected ? null : r.id) }}
                 style={{ cursor: 'pointer' }}>
                 {/* Selection ring */}
-                {isSel && <circle cx={cx} cy={cy} r="22" fill="none" stroke={st.color} strokeWidth="2" strokeDasharray="4 3" opacity="0.8" />}
+                {isSel && <circle cx={cx} cy={cy} r="22" fill="none" stroke={st.color} strokeWidth="2" strokeDasharray="4 3" opacity="0.9" />}
 
                 {/* Unit box */}
                 <rect x={cx-14} y={cy-14} width="28" height="28" rx="7"
-                  fill="#060d1a" stroke={st.color} strokeWidth={isSel ? 3 : 2} />
+                  fill="#ffffff" stroke={st.color} strokeWidth={isSel ? 3 : 2} />
 
                 {/* Glyph */}
                 <text x={cx} y={cy+5} textAnchor="middle" fontSize="13" fontWeight="800" fill={st.color}>
@@ -139,19 +139,19 @@ export default function LiveMap({ incidents = [], resources = [], assignments = 
                 {/* Offline X */}
                 {isDown && (
                   <>
-                    <line x1={cx-10} y1={cy-10} x2={cx+10} y2={cy+10} stroke="#ef4444" strokeWidth="2.5" />
-                    <line x1={cx+10} y1={cy-10} x2={cx-10} y2={cy+10} stroke="#ef4444" strokeWidth="2.5" />
+                    <line x1={cx-10} y1={cy-10} x2={cx+10} y2={cy+10} stroke="#dc2626" strokeWidth="2.5" />
+                    <line x1={cx+10} y1={cy-10} x2={cx-10} y2={cy+10} stroke="#dc2626" strokeWidth="2.5" />
                   </>
                 )}
 
                 {/* Status dot */}
                 <circle cx={cx+11} cy={cy-11} r="4"
-                  fill={isDown ? '#ef4444' : assignedResIds.has(r.id) ? '#3b82f6' : '#22c55e'}
-                  stroke="#060d1a" strokeWidth="1.5" />
+                  fill={isDown ? '#dc2626' : assignedResIds.has(r.id) ? '#2563eb' : '#16a34a'}
+                  stroke="#ffffff" strokeWidth="1.5" />
 
                 {/* Label */}
                 {showLabels && (
-                  <text x={cx} y={cy+30} textAnchor="middle" fontSize="10" fill="#64748b" fontWeight="500">
+                  <text x={cx} y={cy+30} textAnchor="middle" fontSize="10" fill="#475569" fontWeight="600">
                     {r.id}
                   </text>
                 )}
@@ -172,7 +172,7 @@ export default function LiveMap({ incidents = [], resources = [], assignments = 
                 style={{ cursor: 'pointer' }}>
                 {/* Critical pulse ring */}
                 {i.severity === 'critical' && (
-                  <circle cx={cx} cy={cy} r="22" fill={sev.color} opacity="0.15"
+                  <circle cx={cx} cy={cy} r="22" fill={sev.color} opacity="0.18"
                     style={{ animation: 'flash 1.5s ease-in-out infinite' }} />
                 )}
                 {isSel && (
@@ -180,15 +180,15 @@ export default function LiveMap({ incidents = [], resources = [], assignments = 
                 )}
                 {/* Main dot */}
                 <circle cx={cx} cy={cy} r="11" fill={sev.color}
-                  stroke={i.status === 'waiting' ? '#fff' : '#060d1a'} strokeWidth="2"
+                  stroke={i.status === 'waiting' ? '#000' : '#ffffff'} strokeWidth="2"
                   strokeDasharray={i.status === 'waiting' ? '3 2' : '0'} />
                 {/* Inner symbol */}
-                <text x={cx} y={cy+4} textAnchor="middle" fontSize="9" fontWeight="800" fill="#060d1a">
+                <text x={cx} y={cy+4} textAnchor="middle" fontSize="9" fontWeight="800" fill="#ffffff">
                   {i.severity === 'critical' ? '!' : i.severity === 'high' ? '↑' : '·'}
                 </text>
                 {/* Label */}
                 {showLabels && (
-                  <text x={cx + 15} y={cy - 10} fontSize="10" fontWeight="700" fill="#e2e8f0">
+                  <text x={cx + 15} y={cy - 10} fontSize="10" fontWeight="700" fill="#0f172a">
                     {i.id}
                   </text>
                 )}
@@ -200,33 +200,33 @@ export default function LiveMap({ incidents = [], resources = [], assignments = 
 
       {/* Info panel for selected item */}
       {selObj && (
-        <div className="border-t border-edge bg-panel2/50 px-4 py-3 text-xs slide-up">
+        <div className="border-t border-slate-200 bg-slate-50 px-4 py-3 text-xs slide-up">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="font-bold text-slate-200 text-sm">{selObj.id}</p>
-              <p className="text-slate-400 mt-0.5">
+              <p className="font-bold text-slate-900 text-sm">{selObj.id}</p>
+              <p className="text-slate-600 mt-0.5 font-medium">
                 {selObj.type ? `${TYPE_ICON[selObj.type] || ''} ${pretty(selObj.type)}` : pretty(selObj.type)}
                 {selObj.severity && ` · ${pretty(selObj.severity)} severity`}
                 {selObj.status && ` · ${selObj.status}`}
               </p>
               {selObj.description && <p className="text-slate-500 mt-1 italic">{selObj.description}</p>}
             </div>
-            <button onClick={() => setSelected(null)} className="text-slate-600 hover:text-slate-400 text-lg leading-none">✕</button>
+            <button onClick={() => setSelected(null)} className="text-slate-400 hover:text-slate-700 text-lg leading-none p-1">✕</button>
           </div>
         </div>
       )}
 
       {/* Legend */}
-      <div className="flex flex-wrap gap-x-5 gap-y-2 border-t border-edge px-4 py-3 text-[11px] text-slate-500">
-        <span className="font-semibold text-slate-600 uppercase tracking-wider">Incidents:</span>
+      <div className="flex flex-wrap gap-x-5 gap-y-2 border-t border-slate-200 px-4 py-3 text-[11px] text-slate-600 bg-slate-50/50 font-medium">
+        <span className="font-bold text-slate-500 uppercase tracking-wider">Incidents:</span>
         {Object.entries(SEVERITY).map(([k, v]) => (
           <span key={k} className="flex items-center gap-1.5">
             <span className="h-2.5 w-2.5 rounded-full" style={{ background: v.color }} />
             {v.label}
           </span>
         ))}
-        <span className="mx-1 text-slate-700">|</span>
-        <span className="font-semibold text-slate-600 uppercase tracking-wider">Resources:</span>
+        <span className="mx-1 text-slate-300">|</span>
+        <span className="font-bold text-slate-500 uppercase tracking-wider">Resources:</span>
         {['available','assigned','unavailable'].map(k => (
           <span key={k} className="flex items-center gap-1.5">
             <span className="h-2.5 w-2.5 rounded-sm border-2" style={{ borderColor: RESOURCE_STATUS[k].color }} />
